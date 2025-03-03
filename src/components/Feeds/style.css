@@ -1,0 +1,39 @@
+.feeds-header-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 25px;   
+    margin-top: 20px;
+}
+
+.header-logo-img{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.feeds-container{
+    padding: 15px;
+}
+
+.welcome-text{
+    color: gray;
+}
+
+
+.add-post-btn{
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 20px;
+    border: none;
+}

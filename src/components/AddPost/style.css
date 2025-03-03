@@ -1,0 +1,146 @@
+.add-post-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.goback-button {
+    color: black;
+    border: none;
+    background-color: transparent;
+    padding-right: 20px;
+    font-size: 30px;
+    position: relative;
+    top: 6px;
+}
+
+.add-post-container {
+    padding: 15px;
+    width: 100%;
+    height: 100vh;
+}
+
+textarea {
+    color: black;
+    width: 90%;
+    border-radius: 10px;
+    background-color: #D9D9D99C;
+    font-family: Kumbh Sans;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17.36px;
+    height: 40%;
+    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.file-input,.camera-input,.photo-input,.video-input,.mobile-camera-input {
+    display: none;
+}
+
+
+.create-button {
+    background-color: #000000;
+    color: white;
+    border-radius: 36px;
+    width: 90%;
+    margin: auto;
+    height: 50px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    font-family: Karla;
+    position: fixed;
+    bottom: 20px;
+    right: 10px;
+    left: 10px;
+}
+
+@media screen and (min-width: 992px){
+    .desktop-add-post-form {
+        height: 90vh;
+    }
+
+    .mobile-add-post-form {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 992px){
+    .desktop-add-post-form {
+        display: none;
+    }
+
+    .mobile-add-post-form {
+        height: 90vh;
+    }
+}
+
+
+.file-icon {
+    color: #DC3840;
+}
+
+label {
+    font-family: Kumbh Sans;
+    font-weight: 700;
+    line-height: 17.36px;
+    color: black;
+}
+
+.camera-icon {
+    color: #3A8CD9;
+    margin-top: 15px;
+}
+
+label {
+    padding-bottom: 25px;
+}
+
+
+.photo-icon {
+    color: #56B617;
+    margin-top: 15px;
+}
+
+.video-icon {
+    color: #EC3F42;
+    margin-top: 15px;
+}
+
+.mobile-camera-icon {
+    color: #3A8CD9;
+    margin-top: 15px;
+}
+
+
+.selected-files {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #D9D9D99C;
+    margin-top: 15px;
+    width: 90%;
+    height: auto;
+}
+
+
+legend {
+    position: relative;
+    top: -2px;
+    font-weight: bold;
+}
+
+.selected-files:first-of-type {
+    margin-top: 25px;
+}
+
+.selected-files:last-of-type {
+    margin-bottom: 200px;
+}
