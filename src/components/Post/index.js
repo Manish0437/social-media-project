@@ -1,436 +1,378 @@
-// import { FaFileAlt } from "react-icons/fa";
-// import './style.css';
 
-// const Post = props => {
-//     const { userDetails } = props;
-//     const { userImage, userName, createdAt, comment, files, likes } = userDetails;
-
-//     const isValidFile = (file) => file instanceof File || file instanceof Blob;
-
-//     return (
-//         <div className="post-container">
-//             <div className="user-details">
-//                 <img src={userImage} alt="user" className="user-profile-image" />
-//                 <div>
-//                     <p className="username">{userName}</p>
-//                     <p className="created-at">{createdAt}</p>
-//                 </div>
-//             </div>
-//             <div className="post-details">
-//                 <p>{comment}</p>
-//                 <ul>
-//                     {files.map((eachFile, index) => (
-//                         <li key={index}>
-//                             {isValidFile(eachFile) && (eachFile.endsWith('.png') || eachFile.endsWith('.jpg') || eachFile.endsWith('.jpeg')) && (
-//                                 <img src={URL.createObjectURL(eachFile)} className="post-image" alt="post" />
-//                             )}
-//                             {isValidFile(eachFile) && eachFile.endsWith('.mp4') && (
-//                                 <video width={200} height={200} controls>
-//                                     <source src={URL.createObjectURL(eachFile)} type={eachFile.type} />
-//                                     Your browser does not support the video tag.
-//                                 </video>
-//                             )}
-//                             {isValidFile(eachFile) && !(eachFile.endsWith('.png') || eachFile.endsWith('.jpg') || eachFile.endsWith('.jpeg') || eachFile.endsWith('.mp4')) && (
-//                                 <div className="file-preview">
-//                                     <FaFileAlt className="file-icon" />
-//                                     <br />
-//                                     <span className="file-name">{eachFile}</span>
-//                                 </div>
-//                             )}
-//                         </li>
-//                     ))}
-//                 </ul>
-//             </div>
-//             <div className="likes">
-//                 <p>{likes}</p>
-//             </div>
-//         </div>
-//     );
-// }
-
-// export default Post;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { FaFileAlt } from "react-icons/fa";
-// import './style.css';
-
-// const Post = props => {
-//     const { userDetails } = props;
-//     const { userImage, userName, createdAt, comment, files, likes } = userDetails;
-
-//     const isValidFile = (file) => file instanceof File || file instanceof Blob;
-
-//     return (
-//         <div className="post-container">
-//             <div className="user-details">
-//                 <img src={userImage} alt="user" className="user-profile-image" />
-//                 <div>
-//                     <p className="username">{userName}</p>
-//                     <p className="created-at">{createdAt}</p>
-//                 </div>
-//             </div>
-//             <div className="post-details">
-//                 <p>{comment}</p>
-//                 <ul>
-//                     {files.map((eachFile, index) => {
-//                         if (!isValidFile(eachFile)) {
-//                             console.error(`Invalid file at index ${index}`, eachFile);
-//                             return null;
-//                         }
-
-//                         const fileURL = isValidFile?URL.createObjectURL(eachFile):null;
-
-//                         return (
-//                             <li key={index}>
-//                                 {isValidFile(eachFile)&&(eachFile.endsWith('.png') || eachFile.endsWith('.jpg') || eachFile.endsWith('.jpeg')) && (
-//                                     <img src={fileURL} className="post-image" alt="post" />
-//                                 )}
-//                                 {isValidFile(eachFile)&&eachFile.endsWith('.mp4') && (
-//                                     <video width={200} height={200} controls>
-//                                         <source src={fileURL} type={eachFile.type} />
-//                                         Your browser does not support the video tag.
-//                                     </video>
-//                                 )}
-//                                 {isValidFile(eachFile)&&!(eachFile.endsWith('.png') || eachFile.endsWith('.jpg') || eachFile.endsWith('.jpeg') || eachFile.endsWith('.mp4')) && (
-//                                     <div className="file-preview">
-//                                         <FaFileAlt className="file-icon" />
-//                                         <br />
-//                                         <span className="file-name">{eachFile}</span>
-//                                     </div>
-//                                 )}
-//                                 {!isValidFile(eachFile) && (
-//                                     <div className="file-preview">
-//                                         <FaFileAlt className="file-icon" />
-//                                         <br />
-//                                         <span className="file-name">{eachFile}</span>
-//                                     </div>
-//                                 )}
-//                             </li>
-//                         );
-//                     })}
-//                 </ul>
-//             </div>
-//             <div className="likes">
-//                 <p>{likes}</p>
-//             </div>
-//         </div>
-//     );
-// }
-
-// export default Post;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { FaFileAlt } from "react-icons/fa";
-// import './style.css';
-
-// const Post = props => {
-//     const { userDetails } = props;
-//     const { userImage, userName, createdAt, comment, files, likes } = userDetails;
-
-//     // Modified to check if the file is a string (filename) or a File/Blob object
-//     const isValidFile = (file) => file instanceof File || file instanceof Blob;
-//     const isString = (file) => typeof file === 'string';
-
-//     return (
-//         <div className="post-container">
-//             <div className="user-details">
-//                 <img src={userImage} alt="user" className="user-profile-image" />
-//                 <div>
-//                     <p className="username">{userName}</p>
-//                     <p className="created-at">{createdAt}</p>
-//                 </div>
-//             </div>
-//             <div className="post-details">
-//                 <p>{comment}</p>
-//                 <ul>
-//                     {files && files.map((eachFile, index) => {
-//                         // Handle case when file is a string (filename)
-//                         if (isString(eachFile)) {
-//                             return (
-//                                 <li key={index}>
-//                                     <div className="file-preview">
-//                                         <FaFileAlt className="file-icon" />
-//                                         <br />
-//                                         <span className="file-name">{eachFile}</span>
-//                                     </div>
-//                                 </li>
-//                             );
-//                         }
-
-//                         // Handle case when file is a File/Blob object
-//                         if (isValidFile(eachFile)) {
-//                             const fileURL = URL.createObjectURL(eachFile);
-                            
-//                             // Check file type
-//                             const fileName = eachFile.name || '';
-//                             const isImage = /\.(jpg|jpeg|png|gif)$/i.test(fileName);
-//                             const isVideo = /\.mp4$/i.test(fileName);
-
-//                             return (
-//                                 <li key={index}>
-//                                     {isImage && (
-//                                         <img src={fileURL} className="post-image" alt="post" />
-//                                     )}
-//                                     {isVideo && (
-//                                         <video width={200} height={200} controls>
-//                                             <source src={fileURL} type={eachFile.type} />
-//                                             Your browser does not support the video tag.
-//                                         </video>
-//                                     )}
-//                                     {!isImage && !isVideo && (
-//                                         <div className="file-preview">
-//                                             <FaFileAlt className="file-icon" />
-//                                             <br />
-//                                             <span className="file-name">{fileName}</span>
-//                                         </div>
-//                                     )}
-//                                 </li>
-//                             );
-//                         }
-
-//                         console.log(`Unprocessable file at index ${index}`, eachFile);
-//                         return null;
-//                     })}
-//                 </ul>
-//             </div>
-//             <div className="likes">
-//                 <p>{likes}</p>
-//             </div>
-//         </div>
-//     );
-// }
-
-// export default Post;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import { FaFileAlt } from "react-icons/fa";
+import { FaFileAlt, FaFilePdf, FaFileWord } from "react-icons/fa";
+import { BiSolidNavigation } from "react-icons/bi";
+import { HiHeart } from "react-icons/hi";
 import './style.css';
+import { useEffect, useState } from 'react';
 
 const Post = props => {
-    const { userDetails } = props;
-    const { userImage, userName, createdAt, comment, files, likes } = userDetails;
+    const { userDetails,clickShare } = props;
+    const { userImage, userName, createdAt, comment, files, likes, id } = userDetails;
 
-    // Check if the file is a valid File/Blob object
-    const isValidFile = (file) => file instanceof File || file instanceof Blob;
+    const bgClrList=[
+        "#C2B7E9",
+        "#ADDEDF",
+        "#C2F0BD",
+        "#FFFDB4",
+        "#FBD8A2",
+        "#EEBAB9",
+        "#B3EDDB",
+        "#D1F4ED",
+        "#F6E6CC",
+        "#F1D2CD",
+        "#A2BDE3"
+        ];
+    const randomBgClr=bgClrList[Math.floor(Math.random()*bgClrList.length)];
     
-    // Check if the item is a string
-    const isString = (file) => typeof file === 'string';
+    // State to store processed file data
+    const [fileData, setFileData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isLiked,setIsLiked]=useState(false);
+    const [currentLikes,setCurrentLikes]=useState(0);
     
-    // Determine file type from string or object
-    const getFileType = (file) => {
-        if (isString(file)) {
-            // Check file extension from string
-            if (/\.(jpg|jpeg|png|gif|bmp)$/i.test(file)) return 'image';
-            if (/\.(mp4|mov|avi|wmv|mkv)$/i.test(file)) return 'video';
-            return 'other';
-        } else if (isValidFile(file)) {
-            // Check MIME type or file name from File object
-            const fileName = file.name || '';
-            if (/\.(jpg|jpeg|png|gif|bmp)$/i.test(fileName) || file.type?.startsWith('image/')) return 'image';
-            if (/\.(mp4|mov|avi|wmv|mkv)$/i.test(fileName) || file.type?.startsWith('video/')) return 'video';
-            return 'other';
+    useEffect(() => {
+        // Process the file URLs from Cloudinary
+        const processFiles = () => {
+            // If no files, set loading to false and return
+            if (!files || files.length === 0) {
+                setIsLoading(false);
+                return;
+            }
+            
+            try {
+                // Process each file URL
+                const processedFiles = files.map(url => {
+                    // Default file type and icon
+                    let fileType = 'file';
+                    let fileIcon = <FaFileAlt />;
+                    
+                    // Get filename from URL
+                    const urlParts = url.split('/');
+                    const fileNameWithParams = urlParts[urlParts.length - 1];
+                    const fileName = fileNameWithParams.split('?')[0];
+                    
+                    // Get file extension
+                    const extension = fileName.split('.').pop().toLowerCase();
+                    
+                    // Set file type based on URL and extension
+                    if (url.includes('/image/upload/')) {
+                        fileType = 'image';
+                    } else if (url.includes('/video/upload/')) {
+                        fileType = 'video';
+                    } else if (url.includes('/raw/upload/')) {
+                        if (extension === 'pdf') {
+                            fileType = 'pdf';
+                            fileIcon = <FaFilePdf />;
+                        } else if (['doc', 'docx'].includes(extension)) {
+                            fileType = 'word';
+                            fileIcon = <FaFileWord />;
+                        } else if (extension === 'txt') {
+                            fileType = 'text';
+                            fileIcon = <FaFileAlt />;
+                        }
+                    }
+                    
+                    // Create PDF preview URL
+                    let previewUrl = null;
+                    if (fileType === 'pdf') {
+                        // Convert raw URL to image URL for PDF preview
+                        const baseUrl = url.replace('/raw/upload/', '/image/upload/');
+                        
+                        // Get version and filename
+                        const match = url.match(/\/v(\d+)\/([^/]+)$/);
+                        if (match) {
+                            const version = match[1];
+                            const filename = match[2];
+                            // Create thumbnail URL
+                            previewUrl = `${baseUrl.split('/v')[0]}/c_thumb,w_400,h_400,pg_1/v${version}/${filename}`;
+                        }
+                    }
+                    
+                    return {
+                        name: fileName,
+                        type: fileType,
+                        url: url,
+                        previewUrl: previewUrl,
+                        icon: fileIcon,
+                        extension: extension
+                    };
+                });
+                
+                setFileData(processedFiles);
+            } catch (error) {
+                console.error("Error processing files:", error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        
+        processFiles();
+    }, [files]);
+
+    // Format date to readable string
+    const formatDate = (dateString) => {
+        if (!dateString) return "Unknown date";
+        
+        try {
+            // Parse the date string properly
+            const createdAtDate = new Date(dateString);
+            
+            // Check if the date is valid
+            if (isNaN(createdAtDate.getTime())) {
+                return "Invalid date";
+            }
+            
+            const now = new Date();
+            const diffInSeconds = Math.floor((now - createdAtDate) / 1000);
+            
+            // Handle future dates (in case of clock mismatch)
+            if (diffInSeconds < 0) return "Just now";
+            
+            const diffInMinutes = Math.floor(diffInSeconds / 60);
+            const diffInHours = Math.floor(diffInMinutes / 60);
+            const diffInDays = Math.floor(diffInHours / 24);
+
+            if (diffInDays > 0) {
+                if (diffInDays === 1) return "Yesterday";
+                if (diffInDays < 7) return `${diffInDays} days ago`;
+                
+                // For older dates, show the actual date
+                const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                return createdAtDate.toLocaleDateString(undefined, options);
+            } else if (diffInHours > 0) {
+                return diffInHours === 1 ? "1 hour ago" : `${diffInHours} hours ago`;
+            } else if (diffInMinutes > 0) {
+                return diffInMinutes === 1 ? "1 minute ago" : `${diffInMinutes} minutes ago`;
+            } else {
+                return diffInSeconds < 10 ? "Just now" : `${diffInSeconds} seconds ago`;
+            }
+        } catch (error) {
+            console.error("Error formatting date:", error);
+            return "Date error";
         }
-        return 'unknown';
     };
 
+    // Handle document errors
+    const handleDocumentError = (e) => {
+        e.preventDefault();
+        alert('This file cannot be accessed. It may require authentication or has been deleted.');
+    };
+
+    
+    const handleLike = async() => {
+        setIsLiked(!isLiked);
+        console.log("Liked:",isLiked);
+        if(isLiked){
+            const newLikesCount=likes+1;
+            try {
+                const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ likes: newLikesCount }),
+                });
+    
+                if (!response.ok) {
+                    throw new Error('Failed to update likes');
+                }
+    
+                // Optionally, handle the response data if needed
+                const updatedPost = await response.json();
+                console.log('Updated post:', updatedPost);
+            } catch (error) {
+                console.error("Error updating likes:", error);
+                setIsLiked(false); // Revert the like status if the API call fails
+                setCurrentLikes(currentLikes); // Revert the likes count
+            }
+        }
+    }
+    
+
+    const handleShare=() => {
+        clickShare(id);
+    }
+
+
     return (
-        <div className="post-container">
+        <div className="post-container" style={{backgroundColor:`${randomBgClr}`}}>
+            {/* User profile section */}
             <div className="user-details">
                 <img src={userImage} alt="user" className="user-profile-image" />
                 <div>
                     <p className="username">{userName}</p>
-                    <p className="created-at">{createdAt}</p>
+                    <p className="created-at">{formatDate(createdAt)}</p>
                 </div>
             </div>
-            <div className="post-details">
-                <p>{comment}</p>
-                <ul>
-                    {files && files.map((file, index) => {
-                        const fileType = getFileType(file);
-                        
-                        // Handle string filenames
-                        if (isString(file)) {
-                            return (
-                                <li key={index}>
-                                    {fileType === 'image' && (
-                                        <div className="image-preview">
-                                            {/* You might need a way to get the actual URL for the image */}
-                                            {/* For now, display placeholder or file name */}
-                                            <div className="placeholder-image">
-                                                <span>Image: {file}</span>
-                                            </div>
-                                        </div>
-                                    )}
-                                    {fileType === 'video' && (
-                                        <div className="video-preview">
-                                            {/* You might need a way to get the actual URL for the video */}
-                                            {/* For now, display placeholder or file name */}
-                                            <div className="placeholder-video">
-                                                <span>Video: {file}</span>
-                                            </div>
-                                        </div>
-                                    )}
-                                    {fileType === 'other' && (
-                                        <div className="file-preview">
-                                            <FaFileAlt className="file-icon" />
-                                            <br />
-                                            <span className="file-name">{file}</span>
-                                        </div>
-                                    )}
-                                </li>
-                            );
-                        }
-                        
-                        // Handle File/Blob objects
-                        if (isValidFile(file)) {
-                            const fileURL = URL.createObjectURL(file);
-                            
-                            return (
-                                <li key={index}>
-                                    {fileType === 'image' && (
-                                        <img src={fileURL} className="post-image" alt="post" />
-                                    )}
-                                    {fileType === 'video' && (
-                                        <video width={200} height={200} controls>
-                                            <source src={fileURL} type={file.type} />
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    )}
-                                    {fileType === 'other' && (
-                                        <div className="file-preview">
-                                            <FaFileAlt className="file-icon" />
-                                            <br />
-                                            <span className="file-name">{file.name}</span>
-                                        </div>
-                                    )}
-                                </li>
-                            );
-                        }
 
-                        console.log(`Unprocessable file at index ${index}`, file);
-                        return null;
-                    })}
-                </ul>
+            {/* Post content section */}
+            <div className="post-details">
+                <p className="post-comment">{comment}</p>
+                
+                {/* File display section */}
+                {isLoading ? (
+                    <div className="loading-indicator">Loading files...</div>
+                ) : fileData.length > 0 ? (
+                    <ul className="media-list">
+                        {fileData.map((file, index) => (
+                            <li key={`file-${index}`} className="media-item">
+                                {/* Image files */}
+                                {file.type === 'image' && (
+                                    <div className="image-container">
+                                        <img 
+                                            src={file.url} 
+                                            alt={file.name} 
+                                            className="post-image" 
+                                            loading="lazy"
+                                            onError={(e) => {
+                                                // Show placeholder if image fails to load
+                                                e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f0f0f0'/%3E%3Cpath d='M30,30 L70,70 M30,70 L70,30' stroke='%23999' stroke-width='5'/%3E%3C/svg%3E";
+                                                e.target.alt = "Image unavailable";
+                                            }}
+                                        />
+                                    </div>
+                                )}
+                                
+                                {/* Video files */}
+                                {file.type === 'video' && (
+                                    <div className="video-container">
+                                        <video controls className="post-video">
+                                            <source src={file.url} />
+                                            Your browser does not support video playback.
+                                        </video>
+                                    </div>
+                                )}
+                                
+                                {/* PDF files */}
+                                {file.type === 'pdf' && (
+                                    <div className="document-preview">
+                                        <div className="document-thumbnail">
+                                            {file.previewUrl ? (
+                                                <img 
+                                                    src={file.previewUrl} 
+                                                    alt={`Preview of ${file.name}`} 
+                                                    className="pdf-thumbnail" 
+                                                    onError={(e) => {
+                                                        // Show icon if preview fails
+                                                        e.target.style.display = 'none';
+                                                        const icon = document.createElement('div');
+                                                        icon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="50" height="50" fill="#E74C3C"><path d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48zm250.2-143.7c-12.2-12-47-8.7-64.4-6.5-17.2-10.5-28.7-25-36.8-46.3 3.9-16.1 10.1-40.6 5.4-56-4.2-26.2-37.8-23.6-42.6-5.9-4.4 16.1-.4 38.5 7 67.1-10 23.9-24.9 56-35.4 74.4-20 10.3-47 26.2-51 46.2-3.3 15.8 26 55.2 76.1-31.2 22.4-7.4 46.8-16.5 68.4-20.1 18.9 10.2 41 17 55.8 17 25.5 0 28-28.2 17.5-38.7zm-198.1 77.8c5.1-13.7 24.5-29.5 30.4-35-19 30.3-30.4 35.7-30.4 35zm81.6-190.6c7.4 0 6.7 32.1 1.8 40.8-4.4-13.9-4.3-40.8-1.8-40.8zm-24.4 136.6c9.7-16.9 18-37 24.7-54.7 8.3 15.1 18.9 27.2 30.1 35.5-20.8 4.3-38.9 13.1-54.8 19.2zm131.6-5s-5 6-37.3-7.8c35.1-2.6 40.9 5.4 37.3 7.8z"/></svg>';
+                                                        e.target.parentNode.appendChild(icon);
+                                                    }}
+                                                />
+                                            ) : (
+                                                <FaFilePdf className="file-icon pdf-icon" />
+                                            )}
+                                        </div>
+                                        <div className="document-info">
+                                            <span className="file-name">{file.name}</span>
+                                            <div className="document-actions">
+                                                <a 
+                                                    href={file.url} 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer" 
+                                                    className="view-link"
+                                                    onClick={(e) => {
+                                                        if (file.url.includes('401') || file.url.includes('404')) {
+                                                            handleDocumentError(e);
+                                                        }
+                                                    }}
+                                                >
+                                                    View
+                                                </a>
+                                                {/* <a 
+                                                    href={file.url} 
+                                                    download={file.name} 
+                                                    className="download-link"
+                                                    onClick={(e) => {
+                                                        if (file.url.includes('401') || file.url.includes('404')) {
+                                                            handleDocumentError(e);
+                                                        }
+                                                    }}
+                                                >
+                                                    Download
+                                                </a> */}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                                
+                                {/* Word and text files */}
+                                {(file.type === 'word' || file.type === 'text') && (
+                                    <div className="document-preview">
+                                        <div className="document-thumbnail">
+                                            {file.icon}
+                                        </div>
+                                        <div className="document-info">
+                                            <span className="file-name">{file.name}</span>
+                                            <a 
+                                                href={file.url} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer" 
+                                                className="view-link"
+                                                onClick={(e) => {
+                                                    if (file.url.includes('401') || file.url.includes('404')) {
+                                                        handleDocumentError(e);
+                                                    }
+                                                }}
+                                            >
+                                                View
+                                            </a>
+                                            {/* <a 
+                                                href={file.url} 
+                                                download={file.name} 
+                                                className="download-link"
+                                                onClick={(e) => {
+                                                    if (file.url.includes('401') || file.url.includes('404')) {
+                                                        handleDocumentError(e);
+                                                    }
+                                                }}
+                                            >
+                                                Download
+                                            </a> */}
+                                        </div>
+                                    </div>
+                                )}
+                                
+                                {/* Generic files */}
+                                {file.type === 'file' && (
+                                    <div className="file-preview">
+                                        <FaFileAlt className="file-icon" />
+                                        <span className="file-name">{file.name}</span>
+                                        <a 
+                                            href={file.url} 
+                                            download 
+                                            className="download-link"
+                                            onClick={(e) => {
+                                                if (file.url.includes('401') || file.url.includes('404')) {
+                                                    handleDocumentError(e);
+                                                }
+                                            }}
+                                        >
+                                            Download
+                                        </a>
+                                    </div>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No files attached to this post.</p>
+                )}
             </div>
-            <div className="likes">
-                <p>{likes}</p>
+            
+            
+            <div className="post-footer-container">
+                <div className="likes-section" onClick={handleLike}>
+                    {isLiked && <p style={{ color: "#D95B7F" }}><HiHeart id="heart-icon" /> {likes}</p>}
+                    {!isLiked && <p><HiHeart id="heart-icon"/> {likes}</p>}
+                </div>
+                <div className="share-section" onClick={handleShare}>
+                    <p><BiSolidNavigation id="share-icon"/> Share</p>
+                </div>
             </div>
         </div>
     );
-}
+};
 
 export default Post;

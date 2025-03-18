@@ -1,0 +1,144 @@
+.edit-profile-component {
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    padding: 0px;
+    /* background:red; */
+}
+
+
+.edit-profile-top-container {
+    background-image: url('https://s3-alpha-sig.figma.com/img/d4b7/bb5d/bd8b3943a763e1d2e13b607efc1e224e?Expires=1742774400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=T9PW7~Wa~LPfUCDUVIjAJ1yW3ii09GQsnYpBeYMe5BMEcAN7OImOhu9SwKJYxcbt28oaYj3-cK-aDLW6PUw1W6wZE9oRTwR6enYitwOZ0WO0XwfpT0-d84KNcZMvI8rrqJ25vbLxBjggXhBpU5n645h2~0rl4JEDDtuOM1d~--9CKrthJfAaORsNLJLFhdBoxPYI9i4Lp2obJTb0Rrhag~OkVBFhqPvoO3gHdLh0ZYxKND0O1gvfta6ppZvcgT6C1c~4hdlPGnx6fmOosN26bOFG4RZvQDLJdALCB-R--1ZzZkMfdsmgj~6ER7ae8xttkd8WRqsHiuRtAqwWiDe5hQ__');
+    width: 100%;
+    height: 25vh;
+    top: -5px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius:20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:center;
+}
+
+.edit-profile-top-container {
+    width: 100%;
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+
+
+.edit-profile-nav-cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    /* background-color: yellow; */
+    position: relative;
+    top: 25px;
+    color: white;
+    left: 10px;
+}
+
+
+.edit-profile-back-button {
+    border: none;
+    font-size: 22px;
+    background-color: transparent;
+    color:white;
+}
+
+.edit-profile-bg-pic{
+    width: 25px;
+    border-radius: 50%;
+    align-self: flex-end;
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+    border: none;
+    font-size: 15px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-pic-edit {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    position: relative;
+    top: -60px;
+    left:15px;
+    border-width: 0px;
+    clip-path: none;
+    shape-outside: none;
+    /* border: 3px solid red; */
+}
+
+
+.ep-profile-pic-edit-cont{
+    position: relative;
+    /* background-color: yellow; */
+    width: 100%;
+    height: 65px;
+}
+
+.edit-profile-pic-button{
+    position: absolute;
+    top: 25px;
+    left: 110px;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    padding: 5px;
+    border: none;
+}
+
+.edit-profile-title {
+    margin-left: 15px;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 25px;
+}
+
+label {
+    font-weight: 400;
+}
+
+
+.profile-name-input,.profile-bio-input {
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid grey;
+    margin-top: -25px;
+    text-wrap: wrap;
+    outline: 0px;
+    font-weight: 600;
+}
+
+
+
+.save-button {
+    position: fixed;
+    bottom: 40px;
+    width: 90%;
+    border-radius: 25px;
+    border-width: 0px;
+    padding: 8px;
+    color: white;
+    background-color: black;
+    font-weight: bold;
+}

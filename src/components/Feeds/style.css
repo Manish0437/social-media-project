@@ -14,6 +14,13 @@
 
 .feeds-container{
     padding: 15px;
+    position: relative;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
 }
 
 .welcome-text{
@@ -36,4 +43,179 @@
     cursor: pointer;
     font-size: 20px;
     border: none;
+}
+
+.share-bg-container{
+    width: 100%;
+    height: 110vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    backdrop-filter: brightness(0.3);
+}
+
+
+.posts-container {
+    width: 95%;
+    height: 100vh;
+    position: absolute;
+    top: 200px;
+    left: 0px;
+    right: 0px;
+    z-index: -2;
+    padding: 0px 10px;
+}
+
+.share-container {
+    width: 300px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.share-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#cancelbutton-icon {
+    background: #F5F5F5;
+    border-radius: 50%;
+    padding: 5px 9px;
+    border-width: 0px;
+    font-size: 20px;
+}
+
+
+.share-apps-cont {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+
+.app-cont {
+    width: 80px;
+    height: 80px;
+    /* background-color: yellow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 8px;
+}
+
+.app-desp {
+    opacity: 60%;
+    font-family: Kumbh Sans;
+}
+
+#twitter,#facebook,#reddit,#discord,#whatsapp,#messenger,#telegram,#instagram{
+    font-size: 25px;
+}
+
+
+#twitter {
+    border-radius: 50%;
+    border-width: 0px;
+    padding: 15px;
+    color: #03A9F4;
+    background-color: #E9F6FB;
+}
+
+#facebook {
+    border-radius: 50%;
+    border-width: 0px;
+    padding: 15px;
+    color: #1877F2;
+    background-color: #E7F1FD;
+}
+
+#reddit {
+    border-radius: 50%;
+    border-width: 0px;
+    padding: 15px;
+    color: #FF5722;
+    background-color: #FDECE7;
+}
+
+
+#discord {
+    border-radius: 50%;
+    border-width: 0px;
+    padding: 15px;
+    color: #6665D2;
+    background-color: #ECF5FA;
+}
+
+
+
+#whatsapp {
+    border-radius: 50%;
+    border-width: 0px;
+    padding: 15px;
+    color: #67C15E;
+    background-color: #E7FBF0;
+}
+
+
+#messenger {
+    border-radius: 50%;
+    border-width: 0px;
+    padding: 15px;
+    color: #1E88E5;
+    background-color: #E5F3FE;
+}
+
+
+#telegram {
+    border-radius: 50%;
+    border-width: 0px;
+    padding: 15px;
+    color: #1B92D1;
+    background-color: #E6F3FB;
+}
+
+
+#instagram {
+    border-radius: 50%;
+    border-width: 0px;
+    padding: 15px;
+    /* background: linear-gradient(49.1deg, #FFDD55 6.59%, #FF543E 50.03%, #C837AB 93.47%); */
+    /* color: white; */
+    background: #FF40C617;
+}
+
+.share-footer {
+    margin: 15px;
+}
+
+.copy-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #D9D9D9;
+    border-radius: 8px;
+    padding: 10px;
+    opacity: 90%;
+    margin: 10px;
+}
+
+
+#clip-input {
+    border: none;
+    background-color: transparent;
+    margin: 10px;
 }

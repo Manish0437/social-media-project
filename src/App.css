@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Kumbh+Sans:wght@100..900&display=swap');
 .App {
   text-align: center;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  height: 100vh;
 }
 
 .App-logo {
