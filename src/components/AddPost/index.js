@@ -54,25 +54,6 @@ const AddPost = () => {
     return currentList;
   };
 
-  // const handleImageUpload = async(files) => {
-  //   const uploadedImages = [];
-
-  //   for (const file of files) {
-  //     const data = new FormData();
-  //     data.append("file", file);
-  //     data.append("upload_preset","sm_pre_name");
-  //     data.append("cloud_name","dfeyufa3x");
-  //     try {
-  //       const response = await fetch("https://api.cloudinary.com/v1_1/dfeyufa3x/image/upload", data);
-  //       const imageUlr=response.data.url.toString();
-  //       uploadedImages.push(imageUlr);
-  //     } catch (error) {
-  //       console.error("Error uploading file:", error);
-  //     }
-  //   }
-  //   console.log("uploadedImages:",uploadedImages);
-  //   return uploadedImages;
-  // };
 
   const onChangeFileInput = async (e) => {
     const files = Array.from(e.target.files);
@@ -85,21 +66,6 @@ const AddPost = () => {
 
     setFilesList(updatedList);
 
-    // const previewFiles=e.target.files;
-    // const previewImageArray=[]
-    // const uploadPromises=Array.from(previewFiles).map((file)=>{
-    //   return new Promise ((resolve)=> {
-    //     const reader = new FileReader();
-    //     reader.onload=(event)=> {
-    //       previewImageArray.push(event.target.result);
-    //       resolve();
-    //     };
-    //     reader.readAsDataURL(file);
-    //   });
-    // });
-    // await Promise.all(uploadPromises);
-    // setFilesList(previewImageArray);
-    // handleImageUpload(previewFiles);
   };
 
   const onChangeCameraInput = (e) => {
@@ -304,62 +270,6 @@ const AddPost = () => {
       const data = await response.json();
       console.log("Post created successfully:", data);
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-      // Create FormData and append files and metadata
-
-      // const formData = new FormData();
-
-      // // Add metadata
-
-      // formData.append("userName", "User");
-
-      // formData.append("userImage", "default.jpg");
-
-      // formData.append("comment", comment);
-
-      // // Add files
-
-      // allFiles.forEach((file) => {
-      //   formData.append("files", file);
-      // });
-
-      // formData.append("file", allFiles);
-      // formData.append("upload_preset", "sm_pre_name");
-      // formData.append("cloud_name", "dfeyufa3x");
-
-      // console.log("formData:", formData);
-
-      // // Post creation request to the correct endpoint
-
-      // const response = await fetch("http://localhost:8080/api/files/upload", {
-      //   method: "POST",
-
-      //   body: formData,
-      // });
-
-      // if (!response.ok) {
-      //   const errorText = await response.text();
-
-      //   console.error("Server response:", errorText);
-
-      //   throw new Error(`HTTP error! status: ${response.status}`);
-      // }
-
-      // const data = await response.json();
-
-      // console.log("Post created successfully:", data);
 
       // Reset form
 

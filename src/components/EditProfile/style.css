@@ -20,7 +20,8 @@
 }
 
 .edit-profile-top-container {
-    width: 100%;
+    width: 110%;
+    margin: auto;
     height: 25vh;
     display: flex;
     flex-direction: column;

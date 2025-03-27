@@ -4,11 +4,12 @@ import { BiSolidNavigation } from "react-icons/bi";
 import { HiHeart } from "react-icons/hi";
 import './style.css';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Post = props => {
     const { userDetails,clickShare } = props;
     const { userImage, userName, createdAt, comment, files, likes, id } = userDetails;
-
+    
     const bgClrList=[
         "#C2B7E9",
         "#ADDEDF",
@@ -28,7 +29,21 @@ const Post = props => {
     const [fileData, setFileData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isLiked,setIsLiked]=useState(false);
-    const [currentLikes,setCurrentLikes]=useState(0);
+    const [currentLikes,setCurrentLikes]=useState(likes||0);
+    const [likedUsers,setLikedUsers]=useState([]);
+    
+    const profileUsername=localStorage.getItem("email");
+    console.log("userName:",localStorage.getItem("email"));
+
+    const isPresent=likedUsers.includes(profileUsername);
+    console.log("likedUsers:",likedUsers);
+
+
+    // useEffect(() => {
+    //     // Check if this post is liked on component mount
+    //     setIsLiked(isPostLiked(id));
+    //     setCurrentLikes(likes||0);
+    // }, [id, likes, isPostLiked]);
     
     useEffect(() => {
         // Process the file URLs from Cloudinary
@@ -158,35 +173,164 @@ const Post = props => {
         alert('This file cannot be accessed. It may require authentication or has been deleted.');
     };
 
-    
-    const handleLike = async() => {
-        setIsLiked(!isLiked);
-        console.log("Liked:",isLiked);
-        if(isLiked){
-            const newLikesCount=likes+1;
-            try {
+
+
+    // Add this to your existing useEffect or create a new one for initialization
+    useEffect(() => {
+        // Try to get liked users from localStorage for this specific post
+        const storedLikedUsers = localStorage.getItem(`likedUsers_${id}`);
+        if (storedLikedUsers) {
+            const parsedLikedUsers = JSON.parse(storedLikedUsers);
+            setLikedUsers(parsedLikedUsers);
+            
+            // Also update isLiked state based on whether current user is in the array
+            setIsLiked(parsedLikedUsers.includes(profileUsername));
+        }
+
+    }, [id, profileUsername]);
+
+    // Then update your handleLike function
+    // const handleLike = async () => {
+    //     // Check if the current user has already liked this post
+    //     if (likedUsers.includes(profileUsername)) {
+    //         alert("You have already liked this post");
+    //         return;
+    //     }
+        
+    //     // User hasn't liked yet, proceed with liking
+    //     try {
+    //         // Create updated arrays and counts
+    //         const updatedLikedUsers = [...likedUsers, profileUsername];
+    //         const updatedLikesCount = currentLikes + 1;
+            
+    //         // Optimistically update UI first
+    //         setIsLiked(true);
+    //         setCurrentLikes(updatedLikesCount);
+    //         setLikedUsers(updatedLikedUsers);
+            
+    //         // Store in localStorage to persist between reloads
+    //         localStorage.setItem(`likedUsers_${id}`, JSON.stringify(updatedLikedUsers));
+            
+    //         // Then update the backend
+    //         const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
+    //             method: "PUT",
+    //             headers: {
+    //                 "Content-Type": "application/json"
+    //             },
+    //             body: JSON.stringify({ likes: updatedLikesCount })
+    //         });
+            
+    //         if (!response.ok) {
+    //             throw new Error('Failed to update likes');
+    //         }
+            
+    //         console.log("Like updated successfully");
+    //     } catch (error) {
+    //         // If the API call fails, revert the UI changes
+    //         console.error("Error updating likes:", error);
+            
+    //         // Remove the user from liked users
+    //         const revertedLikedUsers = likedUsers.filter(username => username !== profileUsername);
+            
+    //         setIsLiked(false);
+    //         setCurrentLikes(prevLikes => prevLikes - 1);
+    //         setLikedUsers(revertedLikedUsers);
+            
+    //         // Update localStorage with reverted data
+    //         localStorage.setItem(`likedUsers_${id}`, JSON.stringify(revertedLikedUsers));
+            
+    //         alert("Failed to update like. Please try again.");
+    //     }
+    // };
+
+
+
+
+    const handleLike = async () => {
+        // Check if the current user has already liked this post
+        const hasLiked = likedUsers.includes(profileUsername);
+        
+        try {
+            if (hasLiked) {
+                // User has already liked, so unlike the post
+                const updatedLikedUsers = likedUsers.filter(username => username !== profileUsername);
+                const updatedLikesCount = Math.max(0, currentLikes - 1); // Prevent negative counts
+                
+                // Optimistically update UI first
+                setIsLiked(false);
+                setCurrentLikes(updatedLikesCount);
+                setLikedUsers(updatedLikedUsers);
+                
+                // Store in localStorage to persist between reloads
+                localStorage.setItem(`likedUsers_${id}`, JSON.stringify(updatedLikedUsers));
+                
+                // Update the backend
                 const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
-                    method: 'PUT',
+                    method: "PUT",
                     headers: {
-                        'Content-Type': 'application/json',
+                        "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ likes: newLikesCount }),
+                    body: JSON.stringify({ likes: updatedLikesCount })
                 });
-    
+                
                 if (!response.ok) {
                     throw new Error('Failed to update likes');
                 }
-    
-                // Optionally, handle the response data if needed
-                const updatedPost = await response.json();
-                console.log('Updated post:', updatedPost);
-            } catch (error) {
-                console.error("Error updating likes:", error);
-                setIsLiked(false); // Revert the like status if the API call fails
-                setCurrentLikes(currentLikes); // Revert the likes count
+                
+                console.log("Unlike successful");
+            } else {
+                // User hasn't liked yet, proceed with liking
+                const updatedLikedUsers = [...likedUsers, profileUsername];
+                const updatedLikesCount = currentLikes + 1;
+                
+                // Optimistically update UI first
+                setIsLiked(true);
+                setCurrentLikes(updatedLikesCount);
+                setLikedUsers(updatedLikedUsers);
+                
+                // Store in localStorage to persist between reloads
+                localStorage.setItem(`likedUsers_${id}`, JSON.stringify(updatedLikedUsers));
+                
+                // Then update the backend
+                const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ likes: updatedLikesCount })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to update likes');
+                }
+                
+                console.log("Like successful");
             }
+        } catch (error) {
+            // If the API call fails, revert the UI changes
+            console.error("Error updating likes:", error);
+            
+            // Revert to previous state
+            if (hasLiked) {
+                // Revert back to liked state
+                setIsLiked(true);
+                setCurrentLikes(currentLikes);
+                setLikedUsers(likedUsers);
+            } else {
+                // Revert back to unliked state
+                setIsLiked(false);
+                setCurrentLikes(currentLikes);
+                setLikedUsers(likedUsers.filter(username => username !== profileUsername));
+            }
+            
+            // Ensure localStorage matches the reverted state
+            localStorage.setItem(`likedUsers_${id}`, JSON.stringify(likedUsers));
+            
+            alert("Failed to update like status. Please try again.");
         }
-    }
+    };
+
+
     
 
     const handleShare=() => {
@@ -194,16 +338,17 @@ const Post = props => {
     }
 
 
+
     return (
         <div className="post-container" style={{backgroundColor:`${randomBgClr}`}}>
             {/* User profile section */}
-            <div className="user-details">
+            <Link to={`/view-post/${id}`} className="user-details">
                 <img src={userImage} alt="user" className="user-profile-image" />
                 <div>
                     <p className="username">{userName}</p>
                     <p className="created-at">{formatDate(createdAt)}</p>
                 </div>
-            </div>
+            </Link>
 
             {/* Post content section */}
             <div className="post-details">
@@ -363,9 +508,11 @@ const Post = props => {
             
             
             <div className="post-footer-container">
-                <div className="likes-section" onClick={handleLike}>
-                    {isLiked && <p style={{ color: "#D95B7F" }}><HiHeart id="heart-icon" /> {likes}</p>}
-                    {!isLiked && <p><HiHeart id="heart-icon"/> {likes}</p>}
+                <div className="likes-section" onClick={handleLike} style={{ cursor: 'pointer' }}>
+                    <p style={{ color: isPresent ? "#D95B7F" : "inherit" }}>
+                        <HiHeart id="heart-icon" />
+                        {currentLikes}
+                    </p>
                 </div>
                 <div className="share-section" onClick={handleShare}>
                     <p><BiSolidNavigation id="share-icon"/> Share</p>

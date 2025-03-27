@@ -529,7 +529,7 @@ const EditProfile = () => {
                     (post.userImage && post.userImage === previousProfilePicImage);
                 
                 // If any username field matches, count it as a user post
-                return postHasMatchingName;
+                return postHasMatchingName || postHasMatchingImage;
             });
             
             console.log('Found user posts:', userPosts);

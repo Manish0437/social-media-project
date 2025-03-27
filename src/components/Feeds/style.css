@@ -10,6 +10,7 @@
     border-radius: 50%;
     width: 50px;
     height: 50px;
+    margin-right: 10px;
 }
 
 .feeds-container{
@@ -21,6 +22,7 @@
     width: 100%;
     height: 100vh;
     z-index: 1;
+    box-sizing: border-box;
 }
 
 .welcome-text{
@@ -66,7 +68,7 @@
     width: 95%;
     height: 100vh;
     position: absolute;
-    top: 200px;
+    top: 150px;
     left: 0px;
     right: 0px;
     z-index: -2;
@@ -218,4 +220,16 @@
     border: none;
     background-color: transparent;
     margin: 10px;
+}
+
+
+.feed-logout {
+    position: absolute;
+    right: 25px;
+    border: none;
+    background-color: transparent;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: bold;
 }

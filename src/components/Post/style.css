@@ -377,6 +377,9 @@ ul {
   margin: auto;
   margin-bottom: 20px;
   padding: 15px;
+  display: block;
+  text-decoration: none;
+  color: black;
 }
 
 
@@ -384,6 +387,8 @@ ul {
   display: flex;
   align-items: center;
   margin-bottom: 12px;
+  color: inherit;
+  text-decoration: none;
 }
 
 .user-profile-image {
@@ -425,6 +430,7 @@ ul {
   width: 100%;
   /* background-color: blue; */
   overflow-x: scroll;
+  scrollbar-width: none;
 }
 
 

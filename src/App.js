@@ -5,6 +5,8 @@ import Feeds from "./components/Feeds";
 import AddPost from "./components/AddPost";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
+import ViewPost from './components/ViewPost';
+import EditPost from './components/EditPost';
 import "./App.css";
 
 // Export the context so it can be imported in other files
@@ -29,6 +31,8 @@ const App = () => {
         <Route path="/" element={<LoginForm />} />
         <Route path="/feeds" element={<Feeds />} />
         <Route path="/add-post" element={<AddPost />} />
+        <Route path="/view-post/:id"  element={<ViewPost />} />
+        <Route path="/edit-post/:id"  element={<EditPost />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/editProfile" element={<EditProfile />} />
       </Routes>

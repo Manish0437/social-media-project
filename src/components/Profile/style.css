@@ -1,6 +1,6 @@
 .profile-container {
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     position: relative;
     /* background-color: blue; */
 }
@@ -21,6 +21,7 @@
     cursor: pointer;
     font-size: 20px;
     border: none;
+    z-index: 2;
 }
 
 
@@ -35,6 +36,8 @@
     background-size:cover;
     background-repeat: no-repeat;
     background-position: center;
+    margin: auto;
+    overflow: hidden;
 }
 
 
@@ -58,7 +61,7 @@ h4 {
     border: 1px solid #00000057;
     color: black;
     position: absolute;
-    top: 28%;
+    /* top: 28%; */
     right: 6%;
     width: 50%;
     font-family: "Karla";
@@ -83,30 +86,103 @@ h4 {
 }
 
 .profile-details {
-    padding:20px;
+    /* padding:20px; */
     /* background-color: yellow; */
     position: relative;
-    top: -65px;
-    margin-top: 28px;
+    top: -50px;
+    /* margin-top: 28px; */
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: blue;
+    overflow: auto;
+    padding: 35px;
+    box-sizing: border-box;
 }
 
 .my-posts-container{
     display: flex;
-    flex-flow: row wrap;
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+    background-color: yellow;
+    position: relative;
+    top: -50px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 15px;
 }
 
 .post-item {
     padding: 15px;
+    background-color: green;
+    width: auto;
+    height: auto;
+    box-sizing: border-box;
+    overflow-x: scroll;
+    scrollbar-width: none;
 }
 
 .myposts-images{
     width: 320px;
     height: 250px;
     border-radius: 30px;
+    margin: 10px;
 }
 
 .myposts-videos{
     width: 320px;
     height: 250px;
     border-radius: 30px;
+    margin: 10px;
+}
+
+
+.post-item {
+    position: relative;
+}
+
+.mypost-edit-container {
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* top: 0px;
+    left: 0px;
+    right: 0px; */
+    top: 65px;
+    right: 10%;
+}
+
+.mypost-cont {
+    /* position: absolute; */
+    z-index: 0;
+    width: auto;
+    /* top: 0px;
+    left: 0px;
+    right: 0px; */
+    overflow: auto;
+}
+
+
+.edit-post-button ,.delete-post-button{
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    margin-right: 10px;
+    padding: 5px 8px;
+    border-radius: 8px;
+}
+
+
+.mypost-edit-icon {
+    color: blue;
+    margin-right: 5px;
+}
+
+.mypost-delete-icon {
+    color: red;
+    margin-right: 5px;
 }
