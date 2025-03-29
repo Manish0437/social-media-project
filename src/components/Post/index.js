@@ -33,10 +33,10 @@ const Post = props => {
     const [likedUsers,setLikedUsers]=useState([]);
     
     const profileUsername=localStorage.getItem("email");
-    console.log("userName:",localStorage.getItem("email"));
+    // console.log("userName:",localStorage.getItem("email"));
 
     const isPresent=likedUsers.includes(profileUsername);
-    console.log("likedUsers:",likedUsers);
+    // console.log("likedUsers:",likedUsers);
 
 
     // useEffect(() => {

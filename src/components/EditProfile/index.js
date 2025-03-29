@@ -504,7 +504,7 @@ const EditProfile = () => {
             console.log('Fetching posts...');
             
             // First, get all posts
-            const response = await fetch('http://localhost:8080/api/posts');
+            const response = await fetch('http://localhost:8080/api/posts/all');
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }

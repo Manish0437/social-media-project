@@ -236,6 +236,8 @@ const Profile = () => {
   const [currentPostId, setCurrentPostId] = useState(null);
   const [shareLink, setShareLink] = useState("");
   const [isSharing, setIsSharing] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [postToDelete, setPostToDelete] = useState(null);
 
   const handleAddPost = () => {
     navigate("/add-post");
@@ -350,12 +352,34 @@ const Profile = () => {
   
       // Remove the deleted post from the state
       setMyPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
-  
+      setShowDeleteModal(false);
+      setPostToDelete(null);
       alert('Post deleted successfully!');
     } catch (error) {
       console.error('Error deleting post:', error);
       alert('Failed to delete the post. Please try again.');
     }
+  };
+
+  const displayModal = (postId) => {
+    
+    console.log("Post ID to delete:", postId);
+    setPostToDelete(postId);
+    setShowDeleteModal(true);
+  };
+
+
+  //   <div className="delete-post-bg-modal-container">
+  //     <div className="delete-post-bg-modal" onCancel={()=>closeModal()}>
+  //       <h3>Are you sure you want to delete this post?</h3>
+  //       <button onClick={() => deletePost(postId)}>Yes</button>
+  //       <button onClick={() => setCurrentPostId(null)}>No</button>
+  //     </div>
+  // </div>
+  // };
+  const closeModal = () => {
+    setShowDeleteModal(false);
+    setPostToDelete(null);
   };
 
   return (
@@ -471,6 +495,18 @@ const Profile = () => {
                   </div>
                 </div>
               )}
+        {showDeleteModal && (
+          <div className="delete-post-bg-modal-container">
+            <div className="delete-post-bg-modal">
+              <button onClick={closeModal} id="cancelbutton-icon"><IoClose /></button>
+              <p>Are you sure you want to delete this post?</p>
+              <div className="delete-modal-button-cont">
+              <button onClick={() => deletePost(postToDelete)} id="delete-yes-button">Yes</button>
+              <button onClick={closeModal} id="delete-no-button">No</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
 
@@ -486,7 +522,8 @@ const Profile = () => {
                         <MdEdit className="mypost-edit-icon"/>Edit
                     </button>
                     <button
-                        onClick={() => deletePost(post.id)}
+                        // onClick={() => deletePost(post.id)}
+                        onClick={() => displayModal(post.id)}
                         className="delete-post-button"
                     >
                         <MdDelete className="mypost-delete-icon"/>Delete
@@ -512,8 +549,9 @@ const Profile = () => {
               //   </div>
             ))
           ) : (
-            <p>No posts available</p>
+            <p id="no-posts">No posts available</p>
           )}
+          
         </div>
     </div>
   );
