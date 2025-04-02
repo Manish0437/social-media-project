@@ -157,7 +157,7 @@ export const FormAuthContainer=styled.div`
     right:0px;
     bottom:-14px;
     // top:504px;
-    border: 2px solid red;
+    // border: 2px solid red;
     height:45vh;
     width: 100%;
     box-sizing: border-box;

@@ -1,213 +1,3 @@
-// import { BsPlusLg } from "react-icons/bs";
-// import { useNavigate } from 'react-router-dom';
-// import { HiArrowSmLeft } from "react-icons/hi";
-// import { useContext, useEffect, useState,useCallback} from 'react';
-// import { ProfileDetailsContext } from "../../App";
-// import './style.css';
-
-// const Profile = () => {
-//     const navigate = useNavigate();
-//     const { profileName, profileBio, profilePicImage, profilePicBgImg } = useContext(ProfileDetailsContext);
-//     const defaultBgImage = './login-images/profile-bg-1.jpg';
-//     const backgroundImageStyle = profilePicBgImg || defaultBgImage;
-
-//     const [myPosts, setMyPosts] = useState([]);
-
-//     const handleAddPost = () => {
-//         navigate("/add-post");
-//     }
-
-//     const onEditProfileBtn = () => {
-//         // Store the current profile info in localStorage before navigating to edit profile
-//         localStorage.setItem("previousProfileName", profileName);
-//         localStorage.setItem("previousProfilePicImage", profilePicImage);
-
-//         navigate("/editProfile");
-//     }
-
-//     const callMyPosts = useCallback(async () => {
-//         try {
-//             const response = await fetch("http://localhost:8080/api/posts");
-//             const allPosts = await response.json();
-//             const filteredPosts = allPosts.filter(post => post.userName === profileName);
-//             setMyPosts(filteredPosts);
-//             console.log("filteredPosts:", filteredPosts);
-//         } catch (error) {
-//             console.error("Error fetching posts:", error);
-//         }
-//     }, [profileName]);
-
-//     useEffect(() => {
-//         callMyPosts();
-//     }, [callMyPosts]);
-
-//     return (
-//         <div className="profile-container">
-//             <div className="profile-top-container" style={{backgroundImage:`url(${backgroundImageStyle})`}}>
-//                 <button className="back-button" onClick={()=>navigate("/feeds")}><HiArrowSmLeft /></button>
-//             </div>
-//             <img src={profilePicImage || "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"} className="profile-image" alt="profile-img"/>
-//             <button className="edit-profile-button" onClick={onEditProfileBtn}>Edit Profile</button>
-//             <div className="profile-details">
-//                 <h2 className="profile-name">{profileName || 'Username'}</h2>
-//                 <p className="profile-bio">{profileBio || 'Bio'}</p>
-//                 <h4>My Posts</h4>
-//                 <div className="my-posts-container">
-//                 {myPosts.length > 0 ? (
-//                         myPosts.map(post => (
-//                             <div key={post.id} className="post-item">
-//                                 {post.files.map(eachFile => (
-//                                     eachFile.endsWith('jpg') || eachFile.endsWith('jpeg') || eachFile.endsWith('png') ? (
-//                                         <img key={eachFile} src={eachFile} className="myposts-images" alt="myposts-image" />
-//                                     ) : eachFile.endsWith("mp4") ? (
-//                                         <video key={eachFile} src={eachFile} controls className="myposts-videos"></video>
-//                                     ) : null
-//                                 ))}
-//                             </div>
-//                         ))
-//                     ) : (
-//                         <p>No posts available</p>
-//                     )}
-//                 </div>
-//                 <button type="button" className="add-post-btn" onClick={handleAddPost}>
-//                     <BsPlusLg />
-//                 </button>
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default Profile;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { BsPlusLg } from "react-icons/bs";
 import {useRef} from 'react';
 import { useNavigate } from "react-router-dom";
@@ -226,10 +16,11 @@ import "./style.css";
 const Profile = () => {
   const linkInputRef = useRef(null);
   const navigate = useNavigate();
-  const { profileName, profileBio, profilePicImage, profilePicBgImg } =
-    useContext(ProfileDetailsContext);
-  const defaultBgImage = "./login-images/profile-bg-1.jpg";
-  const backgroundImageStyle = profilePicBgImg || defaultBgImage;
+  const { contextprofileName, contextprofileBio, contextprofilePicImage, contextprofilePicBgImg, setProfileData } = useContext(ProfileDetailsContext);
+  // const defaultBgImage = "./login-images/profile-bg-1.jpg";
+  // const backgroundImageStyle = profilePicBgImg || defaultBgImage;
+
+  const backgroundImageStyle = contextprofilePicBgImg;
 
   const [myPosts, setMyPosts] = useState([]);
 
@@ -245,8 +36,8 @@ const Profile = () => {
 
   const onEditProfileBtn = () => {
     // Store the current profile info in localStorage before navigating to edit profile
-    localStorage.setItem("previousProfileName", profileName);
-    localStorage.setItem("previousProfilePicImage", profilePicImage);
+    localStorage.setItem("previousProfileName", contextprofileName);
+    localStorage.setItem("previousProfilePicImage", contextprofilePicImage);
 
     navigate("/editProfile");
   };
@@ -254,7 +45,7 @@ const Profile = () => {
   const callMyPosts = useCallback(async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/posts/user?userName=${profileName}`
+        `http://localhost:8080/api/posts/user?userName=${contextprofileName}`
       );
       const allPosts = await response.json();
       setMyPosts(allPosts);
@@ -262,7 +53,7 @@ const Profile = () => {
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
-  }, [profileName]);
+  }, [contextprofileName]);
 
 
   useEffect(() => {
@@ -277,6 +68,25 @@ const Profile = () => {
   }, [isSharing, currentPostId]);
 
 
+  // useEffect(() => {
+  //   const callProfileDetails=async () => {
+  //     try{
+  //       const response2= await fetch(
+  //         `http://localhost:8080/api/profile/${localStorage.getItem("email")}`);
+  //       const data2 = await response2.json();
+  //       localStorage.setItem("lsProfileUsername", data2.profileUserName);
+  //       localStorage.setItem("lsProfilePicImg", data2.profileImg);
+  //       localStorage.setItem("lsProfileBio", data2.profileBio);
+  //       localStorage.setItem("lsProfilePicBgImg", data2.profileBgImg);
+
+  //       console.log("data2:",data2);
+  //     } catch (error) {
+  //       console.error("Error fetching profile details:", error);
+  //     }
+  //   }
+  //   callProfileDetails();
+  // },[]);
+  
   useEffect(() => {
     callMyPosts();
   }, [callMyPosts]);
@@ -394,7 +204,7 @@ const Profile = () => {
       </div>
       <img
         src={
-          profilePicImage ||
+          contextprofilePicImage ||
           "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"
         }
         className="profile-image"
@@ -404,8 +214,8 @@ const Profile = () => {
         Edit Profile
       </button>
       <div className="profile-details">
-        <h2 className="profile-name">{profileName || "Username"}</h2>
-        <p className="profile-bio">{profileBio || "Bio"}</p>
+        <h2 className="profile-name">{contextprofileName || "Username"}</h2>
+        <p className="profile-bio">{contextprofileBio || "Bio"}</p>
         <h4>My Posts</h4>
         {/* add the code here */}
         <button type="button" className="add-post-btn" onClick={handleAddPost}>
@@ -416,7 +226,7 @@ const Profile = () => {
                   <div className="share-container">
                     <div className="share-header">
                       <h3>Share post</h3>
-                      <button onClick={cancelShare} id="cancelbutton-icon"><IoClose /></button>
+                      <button onClick={cancelShare} id="profile-cancelbutton-icon"><IoClose /></button>
                     </div>
                     <div className="share-apps-cont">
                       <div className="app-cont">

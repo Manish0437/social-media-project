@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState, useRef,useCallback } from "react";
+import { useEffect, useState, useRef,useCallback, useContext } from "react";
 import Post from "../Post";
+import { ProfileDetailsContext } from "../../App";
 import {
   FaTwitter,
   FaFacebook,
@@ -21,7 +22,7 @@ import "./style.css";
 const Feeds = () => {
   const navigate = useNavigate();
   const linkInputRef = useRef(null);
-
+  const { contextprofileName, contextprofileBio, contextprofilePicImage, contextprofilePicBgImg, setProfileData } = useContext(ProfileDetailsContext);
   const [backendData, setBackendData] = useState([]);
   const [isSharing, setIsSharing] = useState(false);
   const [currentPostId, setCurrentPostId] = useState(null);
@@ -40,10 +41,29 @@ const Feeds = () => {
 
 
       try {
-        const response = await fetch(
+        const response1 = await fetch(
           `http://localhost:8080/api/posts?page=${pageNumber}&size=2`
         );
-        const data = await response.json();
+        const data = await response1.json();
+        const response2= await fetch(
+          `http://localhost:8080/api/profile/${localStorage.getItem("email")}`);
+        const data2 = await response2.json();
+        localStorage.setItem("lsProfileUsername", data2.profileUserName);
+        localStorage.setItem("lsProfilePicImg", data2.profileImg);
+        localStorage.setItem("lsProfileBio", data2.profileBio);
+        localStorage.setItem("lsProfilePicBgImg", data2.profileBgImg);
+
+
+
+        setProfileData({
+          contextprofileName: data2.profileUserName,
+          contextprofileBio: data2.profileBio,
+          contextprofilePicImage: data2.profileImg,
+          contextprofilePicBgImg: data2.profileBgImg,
+        });
+
+        
+        console.log("data2:",data2);
         setIsLastPage(data.last);
 
         const posts = data.content || [];
@@ -72,7 +92,7 @@ const Feeds = () => {
     };
 
     fetchData();
-  }, [pageNumber]);
+  }, [pageNumber,setProfileData]);
 
   const handleScroll = useCallback(() => {
     const scrollTop = document.documentElement.scrollTop;
@@ -188,7 +208,7 @@ const Feeds = () => {
       >
         <img
           src={
-            localStorage.getItem("lsProfilePicImg") ||
+            contextprofilePicImage ||
             "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"
           }
           alt="logo"
@@ -197,13 +217,14 @@ const Feeds = () => {
         <div className="feed-info-container">
           <p className="welcome-text">Welcome Back,</p>
           <h2 className="username-feed-heading">
-            {localStorage.getItem("lsProfileUsername") || "Unknown"}
+            {contextprofileName || "Unknown"}
           </h2>
         </div>
         <button
           type="button"
           onClick={onClickLogout}
           className="feed-logout"
+          title="logout"
         >
           <BiLogOut />
         </button>
@@ -219,7 +240,7 @@ const Feeds = () => {
           <div className="share-container">
             <div className="share-header">
               <h3>Share post</h3>
-              <button onClick={cancelShare} id="cancelbutton-icon">
+              <button onClick={cancelShare} id="feeds-cancelbutton-icon">
                 <IoClose />
               </button>
             </div>

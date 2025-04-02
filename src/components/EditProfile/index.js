@@ -1,407 +1,3 @@
-// import { HiPencil, HiArrowSmLeft } from "react-icons/hi";
-// import { useState,useEffect,useContext} from 'react';
-// import { useNavigate } from "react-router-dom";
-// import './style.css';
-// import { ProfileDetailsContext } from "../../App";
-// const EditProfile=()=>{
-
-//     const defaultBgImage='./login-images/profile-bg-1.jpg';
-
-//     const [profileUsername,setProfileUsername]=useState('');
-//     const [profileBio,setProfileBio]=useState('');
-//     const [profilePicImage,setProfilePicImage]=useState('https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg');
-//     const [profilePicBgImg,setProfilePicBgImg]=useState(defaultBgImage);
-//     const navigate=useNavigate();
-
-//     // const profileData=useContext(ProfileDetailsContext);
-
-
-
-//     // useEffect(() => {
-//     //     if (profileData) {
-//     //         setProfileUsername(profileData.profileName || '');
-//     //         setProfileBio(profileData.profileBio || '');
-//     //     }
-//     // }, [profileData]);
-
-
-//     const { profileName, profileBio: contextProfileBio, profilePicImage: contextProfilePic,profilePicBgImg:contextProfilePicBg ,setProfileData } = useContext(ProfileDetailsContext);
-
-//     useEffect(() => {
-//         // Set initial values from context
-//         setProfileUsername(profileName || '');
-//         setProfileBio(contextProfileBio || '');
-//         if (contextProfilePic) {
-//             setProfilePicImage(contextProfilePic);
-//         }
-//         if(contextProfilePicBg){
-//             setProfilePicBgImg(contextProfilePicBg && contextProfilePicBg !== '' ? contextProfilePicBg : defaultBgImage);
-//         }
-//     }, [profileName, contextProfileBio, contextProfilePic,contextProfilePicBg]);
-
-
-
-
-
-//     const handleProfileUsername=(e)=>{
-//         setProfileUsername(e.target.value);
-//     }
-
-//     const handleProfileBio=(e)=> {
-//         setProfileBio(e.target.value);
-//     }
-
-//     // const handleProfilePicImage = () => {
-//     //     const fileInput = document.createElement('input');
-//     //     fileInput.type = 'file';
-//     //     fileInput.accept = 'image/*';
-//     //     fileInput.onchange = (e) => {
-//     //         const file = e.target.files[0];
-//     //         if (file) {
-//     //             const reader = new FileReader();
-//     //             reader.onload = (e) => setProfilePicImage(e.target.result);
-//     //             reader.readAsDataURL(file);
-//     //         }
-//     //     };
-//     //     fileInput.click();
-//     // };
-
-
-
-
-
-
-
-//     const handleProfilePicImage = () => {
-//         const fileInput = document.createElement('input');
-//         fileInput.type = 'file';
-//         fileInput.accept = 'image/*';
-//         fileInput.onchange = async (e) => {
-//             const file = e.target.files[0];
-//             if (file) {
-//                 const formData = new FormData();
-//                 formData.append('file', file);
-//                 formData.append('upload_preset', 'sm_pre_name');
-//                 formData.append("cloud_name", "dfeyufa3x");
-    
-//                 try {
-//                     const response = await fetch(`https://api.cloudinary.com/v1_1/dfeyufa3x/image/upload`, {
-//                         method: 'POST',
-//                         body: formData
-//                     });
-//                     const data = await response.json();
-//                     setProfilePicImage(data.secure_url);
-//                 } catch (error) {
-//                     console.error('Error uploading image to Cloudinary:', error);
-//                 }
-//             }
-//         };
-//         fileInput.click();
-//     };
-
-
-//     const handleProfilePicBgImage=() => {
-//         const fileInput = document.createElement('input');
-//         fileInput.type = 'file';
-//         fileInput.accept = 'image/*';
-//         fileInput.onchange = async (e) => {
-//             const file = e.target.files[0];
-//             if (file) {
-//                 const formData = new FormData();
-//                 formData.append('file', file);
-//                 formData.append('upload_preset', 'sm_pre_name');
-//                 formData.append("cloud_name", "dfeyufa3x");
-    
-//                 try {
-//                     const response = await fetch(`https://api.cloudinary.com/v1_1/dfeyufa3x/image/upload`, {
-//                         method: 'POST',
-//                         body: formData
-//                     });
-//                     const data = await response.json();
-//                     setProfilePicBgImg(data.secure_url);
-//                 } catch (error) {
-//                     console.error('Error uploading image to Cloudinary:', error);
-//                 }
-//             }
-//         };
-//         fileInput.click();
-
-//     }
-
-
-
-
-//     const handleProfileSave = (e) => {
-//         e.preventDefault();
-
-//         const bgImageToSave=profilePicBgImg || defaultBgImage;
-//         setProfileData({
-//             profileName: profileUsername,
-//             profileBio: profileBio,
-//             profilePicImage: profilePicImage,
-//             profilePicBgImg:bgImageToSave,
-//         });
-//         localStorage.setItem("lsProfileUsername",profileUsername);
-//         localStorage.setItem("lsProfileBio",profileBio);
-//         localStorage.setItem("lsProfilePicImg",profilePicImage);
-//         localStorage.setItem("lsProfilePicBgImg",bgImageToSave);
-//         navigate("/profile");
-//     }
-
-//     const backgroundImageStyle = profilePicBgImg || defaultBgImage;
-
-//     return (
-//         <div className="edit-profile-component">
-//             <div className="edit-profile-top-container" style={{backgroundImage:`url(${backgroundImageStyle})`,backgroundSize:'cover',backgroundPosition:'center'}}>
-//                 <div className="edit-profile-top-nav-container">
-//                     <div className="edit-profile-nav-cont">
-//                         <button className="edit-profile-back-button" onClick={()=>navigate("/profile")}><HiArrowSmLeft /></button>
-//                         <h2 className="edit-profile-title">Edit Profile</h2>
-//                     </div>
-//                     <button className="edit-profile-bg-pic" onClick={handleProfilePicBgImage}><HiPencil /></button>
-//                 </div>
-//             </div>
-//             <div className="ep-profile-pic-edit-cont">
-//                 <img src={profilePicImage} className="profile-pic-edit" alt="profile-pic-edit" />
-//                 <button className="edit-profile-pic-button"
-//                 onClick={handleProfilePicImage}
-//                 >
-//                     <HiPencil />
-//                 </button>
-//             </div>
-//             <form onSubmit={handleProfileSave}>
-//                 <label htmlFor="profile-name" className="profile-name-label">Name</label>
-//                 <br />
-//                 <input type="text" id="profile-name" className="profile-name-input" 
-//                 value={profileUsername}
-//                 placeholder="Enter your Username"
-//                 onChange={handleProfileUsername}/>
-//                 <br />
-//                 <label htmlFor="profile-bio" className="profile-bio-label">Bio</label>
-//                 <br />
-//                 <input type="text" id="profile-bio" className="profile-bio-input"
-//                 value={profileBio}
-//                 placeholder="Enter your Bio"
-//                 onChange={handleProfileBio}/>
-//                 <br />
-//                 <button className="save-button" onClick={handleProfileSave}>SAVE</button>
-//             </form>
-//         </div>
-//     )
-// }
-
-// export default EditProfile;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { HiPencil, HiArrowSmLeft } from "react-icons/hi";
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
@@ -418,23 +14,28 @@ const EditProfile = () => {
     const [isUpdating, setIsUpdating] = useState(false);
     const navigate = useNavigate();
 
-    const { profileName, profileBio: contextProfileBio, profilePicImage: contextProfilePic, profilePicBgImg: contextProfilePicBg, setProfileData } = useContext(ProfileDetailsContext);
+    const { contextprofileName,contextprofileBio,contextprofilePicImage,contextprofilePicBgImg, setProfileData } = useContext(ProfileDetailsContext);
 
     // Get previous profile data from localStorage
     const previousProfileName = localStorage.getItem("previousProfileName");
     const previousProfilePicImage = localStorage.getItem("previousProfilePicImage");
 
     useEffect(() => {
-        // Set initial values from context
-        setProfileUsername(profileName || '');
-        setProfileBio(contextProfileBio || '');
-        if (contextProfilePic) {
-            setProfilePicImage(contextProfilePic);
-        }
-        if (contextProfilePicBg) {
-            setProfilePicBgImg(contextProfilePicBg && contextProfilePicBg !== '' ? contextProfilePicBg : defaultBgImage);
-        }
-    }, [profileName, contextProfileBio, contextProfilePic, contextProfilePicBg]);
+        // Set initial values from context or use fallbacks
+        setProfileUsername(contextprofileName || '');
+        setProfileBio(contextprofileBio || '');
+        setProfilePicImage(contextprofilePicImage || 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg');
+        setProfilePicBgImg(contextprofilePicBgImg || defaultBgImage);
+        
+        // Log initial values for debugging
+        console.log('Initial values from context:', {
+            contextprofileName,
+            contextprofileBio,
+            contextprofilePicImage,
+            contextprofilePicBgImg
+        });
+    
+    }, [contextprofileName, contextprofileBio, contextprofilePicImage, contextprofilePicBgImg]);
 
     const handleProfileUsername = (e) => {
         setProfileUsername(e.target.value);
@@ -589,40 +190,230 @@ const EditProfile = () => {
             setIsUpdating(false);
             
             // Even if there's an error, update the profile and navigate
-            localStorage.removeItem("previousProfileName");
-            localStorage.removeItem("previousProfilePicImage");
+            // localStorage.removeItem("previousProfileName");
+            // localStorage.removeItem("previousProfilePicImage");
             navigate("/profile");
         }
     };
 
+    // const handleProfileSave = async (e) => {
+    //     e.preventDefault();
+
+    //     const bgImageToSave = profilePicBgImg || defaultBgImage;
+        
+    //     // Update profile data in context and localStorage
+    //     setProfileData({
+    //         contextprofileName: profileUsername,
+    //         contextprofileBio: profileBio,
+    //         contextprofilePicImage: profilePicImage,
+    //         contextprofilePicBgImg: bgImageToSave,
+    //     });
+
+    //     console.log('Updated profile data in context:', {
+    //         contextprofileName: profileUsername,
+    //         contextprofileBio: profileBio,
+    //         contextprofilePicImage: profilePicImage,
+    //         contextprofilePicBgImg: bgImageToSave,
+    //     });
+
+    //     // localStorage.clear();
+    //     localStorage.setItem("lsProfileUsername", contextprofileName);
+    //     localStorage.setItem("lsProfileBio", profileBio);
+    //     localStorage.setItem("lsProfilePicImg", profilePicImage);
+    //     localStorage.setItem("lsProfilePicBgImg", bgImageToSave);
+
+    //     console.log('localstorage has updated');
+
+
+    //     const prevprofilenameInLs=localStorage.getItem("previousProfileName");
+    //     console.log('Previous profile name in localStorage:', prevprofilenameInLs);
+    //     const prevprofilepicInLs=localStorage.getItem("previousProfilePicImage");
+
+    //     console.log('Previous profile pic in localStorage:', prevprofilepicInLs);
+
+
+    //     let requestmethod=null;
+    //     let apiprofileUrl=null;
+    //     if ((previousProfileName===""||previousProfileName==="undefined")&&(previousProfilePicImage===""||previousProfilePicImage==="undefined")) {
+    //         requestmethod = 'POST';  
+    //         apiprofileUrl = `http://localhost:8080/api/profile`;  
+    //     } else {
+    //         requestmethod = 'PUT';
+    //         apiprofileUrl = `http://localhost:8080/api/profile/${localStorage.getItem("email")}`;
+    //     }
+
+    //     console.log('Using request method:', requestmethod);
+
+
+    //     const response= await fetch(`${apiprofileUrl}`, {
+    //         method: requestmethod,
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             gmail: localStorage.getItem("email"),
+    //             profileUserName: profileUsername,
+    //             profileBio: profileBio,
+    //             profileImg: profilePicImage,
+    //             profileBgImg: bgImageToSave,
+    //         })
+    //     });
+
+    //     const result=await response.json();
+    //     if(!response.ok){
+    //         console.error('Error updating profile:', result.message);
+    //         setIsUpdating(false);
+    //         return;
+    //     }else{
+    //         console.log('Profile updated successfully and api call is success:', result);
+    //     }
+        
+    //     // Update posts with new profile data if previous data exists
+    //     if (previousProfileName && 
+    //         (previousProfileName !== profileUsername || previousProfilePicImage !== profilePicImage)) {
+    //         console.log("Profile data changed, updating posts...");
+    //         await updatePostsWithNewProfileData();
+    //     } else {
+    //         console.log("No profile name change or no previous data, skipping post updates");
+    //          // Update profile data in context and localStorage
+    //         // setProfileData({
+    //         //     contextprofileName: profileUsername,
+    //         //     contextprofileBio: profileBio,
+    //         //     contextprofilePicImage: profilePicImage,
+    //         //     contextprofilePicBgImg: bgImageToSave,
+    //         // });
+            
+    //         // localStorage.setItem("lsProfileUsername", contextprofileName);
+    //         // localStorage.setItem("lsProfileBio", profileBio);
+    //         // localStorage.setItem("lsProfilePicImg", profilePicImage);
+    //         // localStorage.setItem("lsProfilePicBgImg", bgImageToSave);
+
+    //         navigate("/profile");
+    //     }
+    // };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     const handleProfileSave = async (e) => {
         e.preventDefault();
-
+    
         const bgImageToSave = profilePicBgImg || defaultBgImage;
         
-        // Update profile data in context and localStorage
+        // First update context with current state values
         setProfileData({
-            profileName: profileUsername,
-            profileBio: profileBio,
-            profilePicImage: profilePicImage,
-            profilePicBgImg: bgImageToSave,
+            contextprofileName: profileUsername,
+            contextprofileBio: profileBio,
+            contextprofilePicImage: profilePicImage,
+            contextprofilePicBgImg: bgImageToSave,
         });
-        
+    
+        // Update localStorage with current state values (not context values)
         localStorage.setItem("lsProfileUsername", profileUsername);
         localStorage.setItem("lsProfileBio", profileBio);
         localStorage.setItem("lsProfilePicImg", profilePicImage);
         localStorage.setItem("lsProfilePicBgImg", bgImageToSave);
-        
-        // Update posts with new profile data if previous data exists
-        if (previousProfileName && 
-            (previousProfileName !== profileUsername || previousProfilePicImage !== profilePicImage)) {
-            console.log("Profile data changed, updating posts...");
-            await updatePostsWithNewProfileData();
+    
+        console.log('Updated profile data:', {
+            profileUsername,
+            profileBio,
+            profilePicImage,
+            bgImageToSave,
+        });
+    
+        const prevprofilenameInLs = localStorage.getItem("previousProfileName");
+        const prevprofilepicInLs = localStorage.getItem("previousProfilePicImage");
+    
+        // Determine API request method
+        let requestmethod = null;
+        let apiprofileUrl = null;
+        if ((prevprofilenameInLs === "" || prevprofilenameInLs === "undefined" || !prevprofilenameInLs) && 
+            (prevprofilepicInLs === "" || prevprofilepicInLs === "undefined" || !prevprofilepicInLs)) {
+            requestmethod = 'POST';  
+            apiprofileUrl = `http://localhost:8080/api/profile`;  
         } else {
-            console.log("No profile name change or no previous data, skipping post updates");
-            navigate("/profile");
+            requestmethod = 'PUT';
+            apiprofileUrl = `http://localhost:8080/api/profile/${localStorage.getItem("email")}`;
         }
-    }
+    
+        try {
+            const response = await fetch(`${apiprofileUrl}`, {
+                method: requestmethod,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    gmail: localStorage.getItem("email"),
+                    profileUserName: profileUsername,
+                    profileBio: profileBio,
+                    profileImg: profilePicImage,
+                    profileBgImg: bgImageToSave,
+                })
+            });
+    
+            const result = await response.json();
+            if(!response.ok){
+                console.error('Error updating profile:', result.message);
+                setIsUpdating(false);
+                return;
+            } else {
+                console.log('Profile updated successfully and api call is success:', result);
+            }
+            
+            // Update posts with new profile data if previous data exists
+            if (previousProfileName && 
+                (previousProfileName !== profileUsername || previousProfilePicImage !== profilePicImage)) {
+                console.log("Profile data changed, updating posts...");
+                await updatePostsWithNewProfileData();
+            } else {
+                console.log("No profile name change or no previous data, skipping post updates");
+                navigate("/profile");
+            }
+        } catch (error) {
+            console.error("Error saving profile:", error);
+            setIsUpdating(false);
+        }
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     const backgroundImageStyle = profilePicBgImg || defaultBgImage;
 

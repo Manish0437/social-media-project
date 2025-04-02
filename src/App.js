@@ -19,10 +19,10 @@ const App = () => {
 
   // Use useState to make the profileData stateful
   const [profileData, setProfileData] = useState({
-    profileName: localStorage.getItem("lsProfileUsername") || '',
-    profileBio: localStorage.getItem("lsProfileBio") || '',
-    profilePicImage: localStorage.getItem("lsProfilePicImg") || 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg',
-    profilePicBgImg: localStorage.getItem("lsProfilePicBgImg") || defaultBgImage,
+    contextprofileName: localStorage.getItem("lsProfileUsername") || '',
+    contextprofileBio: localStorage.getItem("lsProfileBio") || '',
+    contextprofilePicImage: localStorage.getItem("lsProfilePicImg") || 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg',
+    contextprofilePicBgImg: localStorage.getItem("lsProfilePicBgImg") || defaultBgImage,
   });
 
   return (

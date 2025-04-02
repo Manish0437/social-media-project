@@ -39,7 +39,7 @@ import { auth, provider } from "../GoogleSignin/config";
 import { signInWithPopup } from "firebase/auth";
 
 class LoginForm extends Component {
-  state = { value: "" };
+  state = { email: "" };
   componentDidMount() {
     const email = localStorage.getItem("email");
     if (email) {

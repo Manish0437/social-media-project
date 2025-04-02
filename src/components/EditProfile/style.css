@@ -4,6 +4,7 @@
     margin: 0px;
     padding: 0px;
     /* background:red; */
+    box-sizing: border-box;
 }
 
 
@@ -46,9 +47,19 @@
 
 .edit-profile-back-button {
     border: none;
+    background-color: dimgray;
+    /* top: 15px;
+    left: 15px; */
+    position: relative;
     font-size: 22px;
-    background-color: transparent;
-    color:white;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .edit-profile-bg-pic{

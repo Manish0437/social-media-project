@@ -31,7 +31,7 @@ const AddPost = () => {
 
   const navigate = useNavigate();
 
-  const { profileName, profilePicImage} = useContext(ProfileDetailsContext);
+  const { contextprofileName, contextprofilePicImage} = useContext(ProfileDetailsContext);
 
   const goBacktoFeeds = () => {
     navigate("/feeds", { replace: true });
@@ -245,8 +245,8 @@ const AddPost = () => {
       const cloudinaryUrls = await uploadToCloudinary(allFiles);
 
       const postData = {
-        userName: profileName||"Username",
-        userImage: profilePicImage||"default.jpg",
+        userName: contextprofileName||"Username",
+        userImage: contextprofilePicImage||"default.jpg",
         createdAt: new Date().toISOString(),
         comment: comment,
         files: cloudinaryUrls.map(item => item.url)// Send just the URLs to your backend
