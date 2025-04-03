@@ -17,9 +17,7 @@ const Profile = () => {
   const linkInputRef = useRef(null);
   const navigate = useNavigate();
   const { contextprofileName, contextprofileBio, contextprofilePicImage, contextprofilePicBgImg, setProfileData } = useContext(ProfileDetailsContext);
-  // const defaultBgImage = "./login-images/profile-bg-1.jpg";
-  // const backgroundImageStyle = profilePicBgImg || defaultBgImage;
-
+  
   const backgroundImageStyle = contextprofilePicBgImg;
 
   const [myPosts, setMyPosts] = useState([]);
@@ -68,25 +66,7 @@ const Profile = () => {
   }, [isSharing, currentPostId]);
 
 
-  // useEffect(() => {
-  //   const callProfileDetails=async () => {
-  //     try{
-  //       const response2= await fetch(
-  //         `http://localhost:8080/api/profile/${localStorage.getItem("email")}`);
-  //       const data2 = await response2.json();
-  //       localStorage.setItem("lsProfileUsername", data2.profileUserName);
-  //       localStorage.setItem("lsProfilePicImg", data2.profileImg);
-  //       localStorage.setItem("lsProfileBio", data2.profileBio);
-  //       localStorage.setItem("lsProfilePicBgImg", data2.profileBgImg);
-
-  //       console.log("data2:",data2);
-  //     } catch (error) {
-  //       console.error("Error fetching profile details:", error);
-  //     }
-  //   }
-  //   callProfileDetails();
-  // },[]);
-  
+    
   useEffect(() => {
     callMyPosts();
   }, [callMyPosts]);
@@ -179,14 +159,7 @@ const Profile = () => {
   };
 
 
-  //   <div className="delete-post-bg-modal-container">
-  //     <div className="delete-post-bg-modal" onCancel={()=>closeModal()}>
-  //       <h3>Are you sure you want to delete this post?</h3>
-  //       <button onClick={() => deletePost(postId)}>Yes</button>
-  //       <button onClick={() => setCurrentPostId(null)}>No</button>
-  //     </div>
-  // </div>
-  // };
+  
   const closeModal = () => {
     setShowDeleteModal(false);
     setPostToDelete(null);

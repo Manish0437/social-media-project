@@ -76,25 +76,8 @@ const EditPost = () => {
     return currentList;
   };
 
-//   const handleFileInputChange = (e, setList) => {
-//     const files = Array.from(e.target.files);
-//     let updatedList = [...setList];
 
-//     files.forEach((file) => {
-//       updatedList = addFileToList(file, updatedList);
-//     });
-
-//     setList(updatedList);
-//   };
-
-//   const removeFile = (index, setList) => {
-//     const updatedFiles = [...setList];
-//     updatedFiles.splice(index, 1);
-//     setList(updatedFiles);
-//   };
-
-
-const handleFileInputChange = (e, setList) => {
+  const handleFileInputChange = (e, setList) => {
     const files = Array.from(e.target.files);
     
     setList(prevList => {

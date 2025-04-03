@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const Post = props => {
     const { userDetails,clickShare } = props;
-    const { userImage, userName, createdAt, comment, files, likes, id } = userDetails;
+    const { userImage, userName, createdAt, comment, files, likes, id, listOfLikedUsers} = userDetails;
     
     const bgClrList=[
         "#C2B7E9",
@@ -30,7 +30,7 @@ const Post = props => {
     const [isLoading, setIsLoading] = useState(true);
     const [isLiked,setIsLiked]=useState(false);
     const [currentLikes,setCurrentLikes]=useState(likes||0);
-    const [likedUsers,setLikedUsers]=useState([]);
+    const [likedUsers,setLikedUsers]=useState(listOfLikedUsers||[]);
     
     const profileUsername=localStorage.getItem("email");
     // console.log("userName:",localStorage.getItem("email"));
@@ -38,12 +38,6 @@ const Post = props => {
     const isPresent=likedUsers.includes(profileUsername);
     // console.log("likedUsers:",likedUsers);
 
-
-    // useEffect(() => {
-    //     // Check if this post is liked on component mount
-    //     setIsLiked(isPostLiked(id));
-    //     setCurrentLikes(likes||0);
-    // }, [id, likes, isPostLiked]);
     
     useEffect(() => {
         // Process the file URLs from Cloudinary
@@ -189,63 +183,7 @@ const Post = props => {
 
     }, [id, profileUsername]);
 
-    // Then update your handleLike function
-    // const handleLike = async () => {
-    //     // Check if the current user has already liked this post
-    //     if (likedUsers.includes(profileUsername)) {
-    //         alert("You have already liked this post");
-    //         return;
-    //     }
-        
-    //     // User hasn't liked yet, proceed with liking
-    //     try {
-    //         // Create updated arrays and counts
-    //         const updatedLikedUsers = [...likedUsers, profileUsername];
-    //         const updatedLikesCount = currentLikes + 1;
-            
-    //         // Optimistically update UI first
-    //         setIsLiked(true);
-    //         setCurrentLikes(updatedLikesCount);
-    //         setLikedUsers(updatedLikedUsers);
-            
-    //         // Store in localStorage to persist between reloads
-    //         localStorage.setItem(`likedUsers_${id}`, JSON.stringify(updatedLikedUsers));
-            
-    //         // Then update the backend
-    //         const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
-    //             method: "PUT",
-    //             headers: {
-    //                 "Content-Type": "application/json"
-    //             },
-    //             body: JSON.stringify({ likes: updatedLikesCount })
-    //         });
-            
-    //         if (!response.ok) {
-    //             throw new Error('Failed to update likes');
-    //         }
-            
-    //         console.log("Like updated successfully");
-    //     } catch (error) {
-    //         // If the API call fails, revert the UI changes
-    //         console.error("Error updating likes:", error);
-            
-    //         // Remove the user from liked users
-    //         const revertedLikedUsers = likedUsers.filter(username => username !== profileUsername);
-            
-    //         setIsLiked(false);
-    //         setCurrentLikes(prevLikes => prevLikes - 1);
-    //         setLikedUsers(revertedLikedUsers);
-            
-    //         // Update localStorage with reverted data
-    //         localStorage.setItem(`likedUsers_${id}`, JSON.stringify(revertedLikedUsers));
-            
-    //         alert("Failed to update like. Please try again.");
-    //     }
-    // };
-
-
-
-
+    
     const handleLike = async () => {
         // Check if the current user has already liked this post
         const hasLiked = likedUsers.includes(profileUsername);
@@ -270,7 +208,7 @@ const Post = props => {
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ likes: updatedLikesCount })
+                    body: JSON.stringify({ likes: updatedLikesCount , listOfLikedUsers: updatedLikedUsers})
                 });
                 
                 if (!response.ok) {
@@ -297,7 +235,7 @@ const Post = props => {
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ likes: updatedLikesCount })
+                    body: JSON.stringify({ likes: updatedLikesCount ,listOfLikedUsers: updatedLikedUsers})
                 });
                 
                 if (!response.ok) {

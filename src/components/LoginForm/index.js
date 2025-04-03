@@ -37,7 +37,7 @@ import vibesnapLogo from "../../login-images/vibesnap-logo.png";
 import "./index.css";
 import { auth, provider } from "../GoogleSignin/config";
 import { signInWithPopup } from "firebase/auth";
-
+// import { signInWithRedirect } from "firebase/auth";
 class LoginForm extends Component {
   state = { email: "" };
   componentDidMount() {
@@ -50,6 +50,7 @@ class LoginForm extends Component {
   handleClick = async () => {
     try {
       const data = await signInWithPopup(auth, provider);
+      // const data =  await signInWithRedirect(auth, provider);
       const email = data.user.email;
       this.setState({ email });
       localStorage.setItem("email", email);

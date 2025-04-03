@@ -204,30 +204,33 @@ const Feeds = () => {
     <div className="feeds-container">
       <div
         className="feeds-header-container"
-        onClick={() => navigate("/profile")}
       >
-        <img
-          src={
-            contextprofilePicImage ||
-            "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"
-          }
-          alt="logo"
-          className="header-logo-img"
-        />
-        <div className="feed-info-container">
-          <p className="welcome-text">Welcome Back,</p>
-          <h2 className="username-feed-heading">
-            {contextprofileName || "Unknown"}
-          </h2>
+        <div id="feeds-profile-info-cont" onClick={() => navigate("/profile")}>
+          <img
+            src={
+              contextprofilePicImage ||
+              "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"
+            }
+            alt="logo"
+            className="header-logo-img"
+          />
+          <div className="feed-info-container">
+            <p className="welcome-text">Welcome Back,</p>
+            <h2 className="username-feed-heading">
+              {contextprofileName || "Unknown"}
+            </h2>
+          </div>
         </div>
-        <button
-          type="button"
-          onClick={onClickLogout}
-          className="feed-logout"
-          title="logout"
-        >
-          <BiLogOut />
-        </button>
+        <div id="feeds-logout-cont">
+          <button
+            type="button"
+            onClick={onClickLogout}
+            className="feed-logout"
+            title="logout"
+          >
+            <BiLogOut />
+          </button>
+        </div>
       </div>
       <h1>Feeds</h1>
 
