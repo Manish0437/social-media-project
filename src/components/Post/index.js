@@ -203,7 +203,7 @@ const Post = props => {
                 localStorage.setItem(`likedUsers_${id}`, JSON.stringify(updatedLikedUsers));
                 
                 // Update the backend
-                const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/posts/${id}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json"
@@ -230,7 +230,7 @@ const Post = props => {
                 localStorage.setItem(`likedUsers_${id}`, JSON.stringify(updatedLikedUsers));
                 
                 // Then update the backend
-                const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/posts/${id}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json"

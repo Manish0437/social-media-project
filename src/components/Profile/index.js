@@ -43,7 +43,7 @@ const Profile = () => {
   const callMyPosts = useCallback(async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/posts/user?userName=${contextprofileName}`
+        `${process.env.REACT_APP_BACKEND_URL}/api/posts/user?userName=${contextprofileName}`
       );
       const allPosts = await response.json();
       setMyPosts(allPosts);
@@ -60,7 +60,7 @@ const Profile = () => {
       // This is a placeholder - replace with your actual domain
       const baseUrl = window.location.origin || 'https://yourapp.com';
       // const link = `${baseUrl}/post/${currentPostId}`;
-      const link=`http://localhost:8080/api/posts/${currentPostId}`;
+      const link=`${process.env.REACT_APP_BACKEND_URL}/api/posts/${currentPostId}`;
       setShareLink(link);
     }
   }, [isSharing, currentPostId]);
@@ -132,7 +132,7 @@ const Profile = () => {
 
   const deletePost = async (postId) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/posts/${postId}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/posts/${postId}`, {
         method: 'DELETE',
       });
   

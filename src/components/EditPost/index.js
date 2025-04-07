@@ -28,7 +28,7 @@ const EditPost = () => {
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/posts/${id}`);
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/posts/${id}`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -203,7 +203,7 @@ const EditPost = () => {
       };
 
       // Update post request to your backend
-      const response = await fetch(`http://localhost:8080/api/posts/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/posts/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

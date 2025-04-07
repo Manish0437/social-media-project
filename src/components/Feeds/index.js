@@ -42,11 +42,11 @@ const Feeds = () => {
 
       try {
         const response1 = await fetch(
-          `http://localhost:8080/api/posts?page=${pageNumber}&size=2`
+          `${process.env.REACT_APP_BACKEND_URL}/api/posts?page=${pageNumber}&size=2`
         );
         const data = await response1.json();
         const response2= await fetch(
-          `http://localhost:8080/api/profile/${localStorage.getItem("email")}`);
+          `${process.env.REACT_APP_BACKEND_URL}/api/profile/${localStorage.getItem("email")}`);
         const data2 = await response2.json();
         localStorage.setItem("lsProfileUsername", data2.profileUserName);
         localStorage.setItem("lsProfilePicImg", data2.profileImg);
@@ -118,7 +118,7 @@ const Feeds = () => {
   useEffect(() => {
     if (isSharing && currentPostId) {
       const baseUrl = window.location.origin || "https://yourapp.com";
-      const link = `${baseUrl}/post/${currentPostId}`;
+      const link = `${baseUrl}/posts/${currentPostId}`;
       setShareLink(link);
     }
   }, [isSharing, currentPostId]);

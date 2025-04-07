@@ -105,7 +105,7 @@ const EditProfile = () => {
             console.log('Fetching posts...');
             
             // First, get all posts
-            const response = await fetch('http://localhost:8080/api/posts/all');
+            const response = await fetch('${process.env.REACT_APP_BACKEND_URL}/api/posts/all');
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -159,7 +159,7 @@ const EditProfile = () => {
                 if (updatedPost.userImage) updatedPost.userImage = profilePicImage;
                 
                 try {
-                    const updateResponse = await fetch(`http://localhost:8080/api/posts/${post.id}`, {
+                    const updateResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/posts/${post.id}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -233,10 +233,10 @@ const EditProfile = () => {
         if ((prevprofilenameInLs === "" || prevprofilenameInLs === "undefined" || !prevprofilenameInLs) && 
             (prevprofilepicInLs === "" || prevprofilepicInLs === "undefined" || !prevprofilepicInLs)) {
             requestmethod = 'POST';  
-            apiprofileUrl = `http://localhost:8080/api/profile`;  
+            apiprofileUrl = `${process.env.REACT_APP_BACKEND_URL}/api/profile`;  
         } else {
             requestmethod = 'PUT';
-            apiprofileUrl = `http://localhost:8080/api/profile/${localStorage.getItem("email")}`;
+            apiprofileUrl = `${process.env.REACT_APP_BACKEND_URL}/api/profile/${localStorage.getItem("email")}`;
         }
     
         try {
