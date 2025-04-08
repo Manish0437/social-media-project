@@ -255,7 +255,7 @@ const AddPost = () => {
       console.log("Post data:", postData);
 
       // Post creation request to your backend
-      const response = await fetch("${process.env.REACT_APP_BACKEND_URL}/api/posts", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/posts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
