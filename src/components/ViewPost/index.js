@@ -27,7 +27,7 @@ const ViewPost = () => {
   useEffect(() => {
     const fetchPostDetails = async () => {
       try {
-        const response = await fetch('${process.env.REACT_APP_BACKEND_URL}/api/posts/' + id);
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/posts/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch post details');
         }

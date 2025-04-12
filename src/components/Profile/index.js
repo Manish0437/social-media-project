@@ -11,6 +11,7 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import Post from "../Post";
+import ClipLoader from "react-spinners/ClipLoader";
 import "./style.css";
 
 const Profile = () => {
@@ -27,6 +28,7 @@ const Profile = () => {
   const [isSharing, setIsSharing] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [postToDelete, setPostToDelete] = useState(null);
+  const [isMyPostsLoading, setIsMyPostsLoading] = useState(true);
 
   const handleAddPost = () => {
     navigate("/add-post");
@@ -47,6 +49,7 @@ const Profile = () => {
       );
       const allPosts = await response.json();
       setMyPosts(allPosts);
+      setIsMyPostsLoading(false);
       console.log("filteredPosts:", allPosts);
     } catch (error) {
       console.error("Error fetching posts:", error);
@@ -58,9 +61,8 @@ const Profile = () => {
     if (isSharing && currentPostId) {
       // Generate the actual share link based on the current post ID
       // This is a placeholder - replace with your actual domain
-      const baseUrl = window.location.origin || 'https://yourapp.com';
-      // const link = `${baseUrl}/post/${currentPostId}`;
-      const link=`${process.env.REACT_APP_BACKEND_URL}/api/posts/${currentPostId}`;
+      const baseUrl = window.location.origin || "https://yourapp.com";
+      const link = `${baseUrl}/view-post/${currentPostId}`;
       setShareLink(link);
     }
   }, [isSharing, currentPostId]);
@@ -292,7 +294,19 @@ const Profile = () => {
         )}
       </div>
 
+      {isMyPostsLoading && (
+        <div className="myposts-loading-container">
+          <ClipLoader
+            color="#3172ce"
+            size={35}
+          />
+          <p>Loading your posts...</p>
+        </div>
+        )
+      }
 
+
+      {!isMyPostsLoading && (
       <div className="my-posts-container">
           {myPosts.length > 0 ? (
             myPosts.map((post) => (
@@ -336,6 +350,7 @@ const Profile = () => {
           )}
           
         </div>
+      )}
     </div>
   );
 };

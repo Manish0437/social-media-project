@@ -37,12 +37,12 @@ const Feeds = () => {
       setIsLoading(true);
 
 
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise(resolve => setTimeout(resolve, 500));
 
 
       try {
         const response1 = await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/api/posts?page=${pageNumber}&size=2`
+          `${process.env.REACT_APP_BACKEND_URL}/api/posts?page=${pageNumber}&size=5`
         );
         const data = await response1.json();
         const response2= await fetch(
@@ -94,31 +94,244 @@ const Feeds = () => {
     fetchData();
   }, [pageNumber,setProfileData]);
 
-  const handleScroll = useCallback(() => {
-    const scrollTop = document.documentElement.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight;
-    const clientHeight = document.documentElement.clientHeight;
+  // const handleScroll = useCallback(() => {
+  //   const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  // const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+  // const clientHeight = document.documentElement.clientHeight || window.innerHeight;
 
+  //   if (
+  //     scrollTop + clientHeight >= scrollHeight - 5 &&
+  //     !isLoading &&
+  //     !isLastPage
+  //   ) {
+  //     setPageNumber((prevPage) => prevPage + 1);
+  //   }
+  // }, [isLoading, isLastPage]);
+
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, [handleScroll]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // const handleScroll = useCallback(() => {
+  //   // Get scroll position with fallbacks for different browsers/devices
+  //   const scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
+  //   const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight || 0;
+  //   const clientHeight = document.documentElement.clientHeight || window.innerHeight || 0;
+  
+  //   // Add a buffer zone to trigger loading earlier (20px instead of 5px)
+  //   // This helps on mobile devices where scroll events can be less frequent
+  //   const bufferZone = 20;
+  
+  //   // Use a more robust condition with additional checks
+  //   if (
+  //     scrollTop + clientHeight >= scrollHeight - bufferZone &&
+  //     !isLoading &&
+  //     !isLastPage &&
+  //     scrollHeight > clientHeight // Ensure there's actually content to scroll
+  //   ) {
+  //     // Debounce the page increment to prevent multiple triggers in quick succession
+  //     // This is especially important on mobile devices with momentum scrolling
+  //     const timer = setTimeout(() => {
+  //       setPageNumber((prevPage) => prevPage + 1);
+  //     }, 100);
+      
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [isLoading, isLastPage]);
+  
+  // // Make sure to add a passive event listener for better performance
+  // useEffect(() => {
+  //   const scrollHandler = () => {
+  //     // Use requestAnimationFrame for smoother performance
+  //     window.requestAnimationFrame(() => handleScroll());
+  //   };
+  
+  //   window.addEventListener("scroll", scrollHandler, { passive: true });
+    
+  //   // Also listen for resize events to handle orientation changes on mobile
+  //   window.addEventListener("resize", scrollHandler, { passive: true });
+    
+  //   return () => {
+  //     window.removeEventListener("scroll", scrollHandler);
+  //     window.removeEventListener("resize", scrollHandler);
+  //   };
+  // }, [handleScroll]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  const handleScroll = useCallback(() => {
+    // Get scroll position with fallbacks for different browsers/devices
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight || 0;
+    const clientHeight = document.documentElement.clientHeight || window.innerHeight || 0;
+    
+    // Add a buffer zone to trigger loading earlier (100px instead of 20px)
+    // This gives more time for the loader to appear before reaching bottom
+    const bufferZone = 100;
+    
+    // Check if we're near the bottom and not already loading or at the last page
     if (
-      scrollTop + clientHeight >= scrollHeight - 5 &&
+      scrollTop + clientHeight >= scrollHeight - bufferZone &&
       !isLoading &&
-      !isLastPage
+      !isLastPage &&
+      scrollHeight > clientHeight // Ensure there's actually content to scroll
     ) {
-      setPageNumber((prevPage) => prevPage + 1);
+      // Set loading to true immediately to show the loader
+      setIsLoading(true);
+      
+      // Use a small timeout to prevent multiple rapid triggers
+      // This is especially important on mobile devices with momentum scrolling
+      setTimeout(() => {
+        setPageNumber((prevPage) => prevPage + 1);
+      }, 100);
     }
   }, [isLoading, isLastPage]);
-
+  
+  // Make sure to add a passive event listener for better performance
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    const scrollHandler = () => {
+      // Use requestAnimationFrame for smoother performance
+      window.requestAnimationFrame(handleScroll);
+    };
+  
+    window.addEventListener("scroll", scrollHandler, { passive: true });
+    
+    // Also listen for resize events to handle orientation changes on mobile
+    window.addEventListener("resize", scrollHandler, { passive: true });
+    
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", scrollHandler);
+      window.removeEventListener("resize", scrollHandler);
     };
   }, [handleScroll]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   useEffect(() => {
     if (isSharing && currentPostId) {
       const baseUrl = window.location.origin || "https://yourapp.com";
-      const link = `${baseUrl}/posts/${currentPostId}`;
+      const link = `${baseUrl}/view-post/${currentPostId}`;
       setShareLink(link);
     }
   }, [isSharing, currentPostId]);

@@ -231,21 +231,28 @@ h4 {
 
 #cancelbutton-icon {
     display: flex;
-    width: 25px;
-    height: 40px;
+    width: 32px;
+    height: 28px;
     align-self: end;
     position: absolute;
-    top: 8px;
+    top: 0px;
     right: 0px;
     border-top-right-radius: 8px;
     font-size: 18px;
     border: none;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
 #profile-cancelbutton-icon {
-    border: none;
+    border-width: 0px;
     font-size: 15px;
+    padding: 5px;
+    background: #f5f5f5;
+    border-radius: 50%;
 }
 
 
@@ -295,4 +302,15 @@ h4 {
 
 .post-item {
     width: 100%;
+}
+
+
+
+.myposts-loading-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
