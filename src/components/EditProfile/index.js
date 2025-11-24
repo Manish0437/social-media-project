@@ -105,7 +105,7 @@ const EditProfile = () => {
             console.log('Fetching posts...');
             
             // First, get all posts
-            const response = await fetch('${process.env.REACT_APP_BACKEND_URL}/api/posts/all');
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/posts/all`);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -190,8 +190,8 @@ const EditProfile = () => {
             setIsUpdating(false);
             
             // Even if there's an error, update the profile and navigate
-            // localStorage.removeItem("previousProfileName");
-            // localStorage.removeItem("previousProfilePicImage");
+            localStorage.removeItem("previousProfileName");
+            localStorage.removeItem("previousProfilePicImage");
             navigate("/profile");
         }
     };
