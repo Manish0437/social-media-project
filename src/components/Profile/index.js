@@ -17,7 +17,7 @@ import "./style.css";
 const Profile = () => {
   const linkInputRef = useRef(null);
   const navigate = useNavigate();
-  const { contextprofileName, contextprofileBio, contextprofilePicImage, contextprofilePicBgImg, setProfileData } = useContext(ProfileDetailsContext);
+  const { contextprofileName, contextprofileBio, contextprofilePicImage, contextprofilePicBgImg } = useContext(ProfileDetailsContext);
   
   const backgroundImageStyle = contextprofilePicBgImg;
 

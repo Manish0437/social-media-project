@@ -22,7 +22,7 @@ import "./style.css";
 const Feeds = () => {
   const navigate = useNavigate();
   const linkInputRef = useRef(null);
-  const { contextprofileName, contextprofileBio, contextprofilePicImage, contextprofilePicBgImg, setProfileData } = useContext(ProfileDetailsContext);
+  const { contextprofileName, contextprofilePicImage, setProfileData } = useContext(ProfileDetailsContext);
   const [backendData, setBackendData] = useState([]);
   const [isSharing, setIsSharing] = useState(false);
   const [currentPostId, setCurrentPostId] = useState(null);

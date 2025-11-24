@@ -28,7 +28,7 @@ const Post = props => {
     // State to store processed file data
     const [fileData, setFileData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [isLiked,setIsLiked]=useState(false);
+    const [,setIsLiked]=useState(false);
     const [currentLikes,setCurrentLikes]=useState(likes||0);
     const [likedUsers,setLikedUsers]=useState(listOfLikedUsers||[]);
     
