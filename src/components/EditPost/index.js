@@ -9,7 +9,6 @@ import SelectedItem from "../SelectedItem/index";
 import { ProfileDetailsContext } from "../../App";
 
 import "./style.css";
-import { FaRemoveFormat } from "react-icons/fa";
 
 const EditPost = () => {
   const [comment, setComment] = useState("");
@@ -63,18 +62,18 @@ const EditPost = () => {
     setComment(e.target.value);
   };
 
-  const addFileToList = (file, currentList) => {
-    const exists = currentList.some(
-      (existingFile) =>
-        existingFile.name === file.name && existingFile.size === file.size
-    );
+  // const addFileToList = (file, currentList) => {
+  //   const exists = currentList.some(
+  //     (existingFile) =>
+  //       existingFile.name === file.name && existingFile.size === file.size
+  //   );
 
-    if (!exists) {
-      return [...currentList, file];
-    }
+  //   if (!exists) {
+  //     return [...currentList, file];
+  //   }
 
-    return currentList;
-  };
+  //   return currentList;
+  // };
 
 
   const handleFileInputChange = (e, setList) => {

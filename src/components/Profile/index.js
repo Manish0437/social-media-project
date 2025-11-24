@@ -47,12 +47,17 @@ const Profile = () => {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/api/posts/user?userName=${contextprofileName}`
       );
+      if (!response.ok) {
+      throw new Error(`API error: ${response.status} ${response.statusText}`);
+    }
       const allPosts = await response.json();
       setMyPosts(allPosts);
       setIsMyPostsLoading(false);
       console.log("filteredPosts:", allPosts);
     } catch (error) {
       console.error("Error fetching posts:", error);
+      setIsMyPostsLoading(false); // Set loading to false even on error
+    setMyPosts([]); // Set empty array so UI doesn't break
     }
   }, [contextprofileName]);
 
