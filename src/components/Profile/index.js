@@ -50,6 +50,14 @@ const Profile = () => {
       if (!response.ok) {
       throw new Error(`API error: ${response.status} ${response.statusText}`);
     }
+
+      // Check if response has content before parsing
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Response is not JSON");
+      }
+
+      
       const allPosts = await response.json();
       setMyPosts(allPosts);
       setIsMyPostsLoading(false);
