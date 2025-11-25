@@ -21,7 +21,7 @@ const EditPost = () => {
 
   const navigate = useNavigate();
   const { id } = useParams();
-  const { profileName, profilePicImage } = useContext(ProfileDetailsContext);
+  const { contextprofileName, contextprofilePicImage } = useContext(ProfileDetailsContext);
 
   // Fetch post data when component mounts
   useEffect(() => {
@@ -194,8 +194,8 @@ const EditPost = () => {
       const cloudinaryUrls = await uploadToCloudinary(allFiles);
 
       const postData = {
-        userName: profileName || "Username",
-        userImage: profilePicImage || "default.jpg",
+        userName: contextprofileName || "Username",
+        userImage: contextprofilePicImage || "default.jpg",
         updatedAt: new Date().toISOString(),
         comment: comment,
         files: cloudinaryUrls.map((item) => item.url),
